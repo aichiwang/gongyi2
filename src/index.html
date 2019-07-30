@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no" />
+		<title>善行100</title>
+		<link rel="stylesheet" href="res/css/index.css">
+		<script>
+			function setRem() {
+				document.documentElement.style.fontSize = document.documentElement.clientWidth / 15 + 'px';
+			}
+			window.onresize = setRem;
+			setRem();
+		</script>
+	</head>
+
+	<body>
+		<div class="wrap">
+			<div class="top">
+				<img src="../dist/res/img/static/centerIcon1.png"/>
+				<span>李沛绮</span>
+			</div>
+			<div class="content">
+				<div class="list">
+					<div class="item">
+						<img src="res/img/static/indexIcon1.jpg"/>
+						<p>项目介绍</p>
+					</div>
+					<div class="item">
+						<img src="res/img/static/indexIcon2.jpg"/>
+						<p>报名登录</p>
+					</div>
+					<div class="item">
+						<img src="res/img/static/indexIcon3.jpg"/>
+						<p>成绩排名</p>
+					</div>
+					<div class="item">
+						<img src="res/img/static/indexIcon4.jpg"/>
+						<p>常见问答</p>
+					</div>
+				</div>
+				<div class="superman"></div>
+			</div>
+		</div>
+
+		<!-- Dom Content End -->
+	</body>
+	<script src="res/libs/jquery/jquery.min.js"></script>
+	<script>
+		$(function() {
+			Init();
+
+			function Init() {
+				events();
+			}
+
+			function events() {
+
+				$('.toCenter').click(function() {
+					location.href = 'center.html';
+				})
+			}
+		})
+	</script>
+
+</html>

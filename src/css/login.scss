@@ -1,0 +1,62 @@
+@charset"UTF-8";
+@import "common/common";
+
+/*好友详情页*/
+html,body{
+    width: 100%;
+    height: 100%;
+}
+
+
+input::-webkit-input-placeholder{
+  color: #fff;
+}
+
+
+.wrap {
+//  text-align: center;
+    width: 100%;
+    height: 100%;
+    background: url(../res/img/static/bg.jpg);
+    background-size: 100% 100%;
+    .content{
+        width: 9.9rem;
+        margin: 0 auto;
+        padding-top: 7.2rem;
+        .phone,.password{
+            border-bottom: 1px solid #fff;
+            input{
+                background: transparent;
+                color: #fff;
+                line-height: 1.4rem;
+            }
+        }
+        .phone{
+             margin-top: 0.7rem;
+        }
+        .password{
+            margin-top: 1.4rem;
+        }
+        .forget{
+            text-align: right;
+            color: #fff;
+            line-height: 1.8rem;
+        }
+        .login,.regist{
+            width: 9.8rem;
+            height: 1.9rem;
+            margin: 0 auto;
+            border-radius: 0.9rem;
+            line-height: 1.9rem;
+            text-align: center;
+            color: #FF8250;
+            font-size: 0.64rem;
+            border: none;
+            background: #fff;
+        }
+        .regist{
+            background: transparent;
+            color: #fff;
+        }
+    }
+}

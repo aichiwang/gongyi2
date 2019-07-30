@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no" />
+		<title>成绩录入</title>
+		<link rel="stylesheet" href="res/css/scorein.css">
+		<script>
+			function setRem() {
+				document.documentElement.style.fontSize = document.documentElement.clientWidth / 15 + 'px';
+			}
+			window.onresize = setRem;
+			setRem();
+		</script>
+	</head>
+
+	<body>
+		<div class="wrap">
+			<input type="text" name="" id="" value="" placeholder="编号"/>
+			<input type="text" name="" id="" value="" placeholder="活动名称"/>
+			<input type="text" name="" id="" value="" placeholder="筹款金额"/>
+			<input type="text" name="" id="" value="" placeholder="订单类型"/>
+			<input type="text" name="" id="" value="" placeholder="订单编号"/>
+			<div class="subBtn">提交</div>
+		</div>
+
+		<!-- Dom Content End -->
+	</body>
+	<script src="res/libs/jquery/jquery.min.js"></script>
+	<script>
+		$(function() {
+			Init();
+
+			function Init() {
+				events();
+			}
+
+			function events() {
+
+				$('.toCenter').click(function() {
+					location.href = 'center.html';
+				})
+			}
+		})
+	</script>
+
+</html>

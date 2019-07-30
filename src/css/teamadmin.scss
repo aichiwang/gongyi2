@@ -1,0 +1,121 @@
+@charset"UTF-8";
+@import "common/common";
+
+/*好友详情页*/
+
+.wrap {
+    width: 13.2rem;
+    margin: 1.04rem auto 0;
+    .top{
+        h5{
+            color: #999;
+            font-size: 0.52rem;
+        }
+    }
+    .search{
+        height: 1.52rem;
+        padding-left: 0.64rem;
+        border-radius: 0.76rem;
+        background: #F2F2F2;
+        input{
+            background: transparent;
+            font-size: 0.6rem;
+            vertical-align: middle;
+            line-height: 1.52rem;
+            color: #c0c0c0;
+        }
+        img{
+            vertical-align: middle;
+        }
+    }
+    .list{
+        margin-top: 0.6rem;
+        .item{
+            position: relative;
+            height: 9.4rem;
+            box-shadow: 0 0 0.5rem #ddd;
+            border-radius: 0.54rem;
+            margin-bottom: 0.6rem;
+            h5{
+                padding: 0.5rem 0.6rem 0.1rem;
+                font-size: 0.6rem;
+                i{
+                    font-size: 0.6rem;
+                }
+                span{
+                    color: #999;
+                    font-size: 0.52rem;
+                }
+            }
+            .til{
+                padding: 0.1rem 0.6rem 0.1rem;
+                font-size: 0.6rem;
+            }
+            p{
+                font-size: 0.52rem;
+                padding: 0 0.6rem;
+                color: #999999;
+                i{
+                    color: #000;
+                }
+            }
+            .dataDetail{
+                width: 12rem;
+                margin: 0.6rem auto 0;
+                border-top: 1px solid #E5E5E5;
+                text-align: center;
+                .dataItem{
+                    display: inline-block;
+                    margin: 0.6rem 0.5rem 0;
+                    font-size: 0.52rem;
+                    p{
+                        color: #444;
+                    }
+                    span{
+                        color: #999;
+                    }
+                }
+            }
+            .operat{
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                height: 1.9rem;
+                padding-top: 0.6rem;
+                background: #F4F4F4;
+                text-align: center;
+                border-bottom-left-radius : 0.52rem;
+                border-bottom-right-radius : 0.52rem;
+                span{
+                    display: inline-block;
+                    width: 23%;
+                    line-height: 1.3rem;
+                    font-size: 0.52rem;
+                    color: #999;
+                    border-right: 1px solid #CCCCCC;
+                }
+                span:last-child{
+                    border:none;
+                }
+            }
+            .admin{
+                position: absolute;
+                top: 0.5rem;
+                right: 0.6rem;
+                color: #444;
+                img{
+                    width: 0.42rem;
+                }
+            }
+        }
+    }
+    .loadMore{
+        display: none;
+        text-align: center;
+        font-size: 0.52rem;
+        color: #ccc;
+        img{
+            width: 0.42rem;
+        }
+    }
+}

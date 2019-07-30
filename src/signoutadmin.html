@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no" />
+		<title>签退管理</title>
+		<link rel="stylesheet" href="res/css/signoutadmin.css">
+		<script>
+			function setRem() {
+				document.documentElement.style.fontSize = document.documentElement.clientWidth / 15 + 'px';
+			}
+			window.onresize = setRem;
+			setRem();
+		</script>
+	</head>
+
+	<body>
+		<div class="wrap">
+			<div class="top">
+				<h5>善行100我的最爱</h5>
+				<p>活动编号：<i>43359333</i></p>
+				<div class="master">批量管理</div>
+			</div>
+			<div class="search">
+				<img src="res/img/static/searchIcon.png"/>
+				<input type="text" name="" id="" value="" placeholder="查询"/>
+			</div>
+			<div class="list">
+				<div class="item">
+					<h5>猪配齐</h5>
+					<p>时间:&nbsp&nbsp<i>2019-07-22  10:00:55</i></p>
+					<p>地点:&nbsp&nbsp北京市海淀区中关村北一街</p>
+					<div class="operat">
+						<span>确认</span>
+						<span>修改</span>
+						<span>删除</span>
+					</div>
+					<div class="time">时长: <i>28时</i></div>
+				</div>
+				<div class="item">
+					<h5>猪配齐</h5>
+					<p>时间:&nbsp&nbsp<i>2019-07-22  10:00:55</i></p>
+					<p>地点:&nbsp&nbsp北京市海淀区中关村北一街</p>
+					<div class="operat">
+						<span>确认</span>
+						<span>修改</span>
+						<span>删除</span>
+					</div>
+					<div class='time'>时长: <i>28时</i></div>
+				</div>
+			</div>
+			<div class="loadMore">
+				<p>点击继续加载</p>
+				<img src="res/img/static/arrowDown.png"/>
+			</div>
+		</div>
+		
+		<!-- Dom Content End -->
+	</body>
+	<script src="res/libs/jquery/jquery.min.js"></script>
+	<script>
+		$(function() {
+			Init();
+
+			function Init() {
+				events();
+			}
+
+			function events() {
+
+				$('.toCenter').click(function() {
+					location.href = 'center.html';
+				})
+			}
+		})
+	</script>
+
+</html>

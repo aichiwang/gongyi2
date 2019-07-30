@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no" />
+		<title>小组管理</title>
+		<link rel="stylesheet" href="res/css/teamadmin.css">
+		<script>
+			function setRem() {
+				document.documentElement.style.fontSize = document.documentElement.clientWidth / 15 + 'px';
+			}
+			window.onresize = setRem;
+			setRem();
+		</script>
+	</head>
+
+	<body>
+		<div class="wrap">
+			<div class="top">
+				<h5>签到活动列表</h5>
+			</div>
+			<div class="list">
+				<div class="item">
+					<h5>
+						<i>001</i>
+						<span>活动编号: <i>89089907</i></span>
+					</h5>
+					<div class="til">善行100真的记号</div>
+					<p>起止时间:2019-07-22  10:00:55</p>
+					<p>活动地点:北京市海淀区中关村北一街</p>
+					<div class="dataDetail">
+						<div class="dataItem">
+							<p>86时</p>
+							<span>服务时长</span>
+						</div>
+						<div class="dataItem">
+							<p>1000元</p>
+							<span>筹款金额</span>
+						</div>
+						<div class="dataItem">
+							<p>60人</p>
+							<span>小组人数</span>
+						</div>
+					</div>
+					<div class="operat">
+						<span>签到管理</span>
+						<span>签退管理</span>
+						<span>成绩审核</span>
+						<span>成绩补录</span>
+					</div>
+					<span class="admin">管理 <img src="res/img/static/arrowDown.png"/></span>
+				</div>
+				<div class="item">
+					<h5>
+						<i>001</i>
+						<span>活动编号: <i>89089907</i></span>
+					</h5>
+					<div class="til">善行100真的记号</div>
+					<p>起止时间:2019-07-22  10:00:55</p>
+					<p>活动地点:北京市海淀区中关村北一街</p>
+					<div class="dataDetail">
+						<div class="dataItem">
+							<p>86时</p>
+							<span>服务时长</span>
+						</div>
+						<div class="dataItem">
+							<p>1000元</p>
+							<span>筹款金额</span>
+						</div>
+						<div class="dataItem">
+							<p>60人</p>
+							<span>小组人数</span>
+						</div>
+					</div>
+					<div class="operat">
+						<span>签到管理</span>
+						<span>签退管理</span>
+						<span>成绩审核</span>
+						<span>成绩补录</span>
+					</div>
+					<span class="admin">管理 <img src="res/img/static/arrowDown.png"/></span>
+				</div>
+			</div>
+			<div class="loadMore">
+				<p>点击继续加载</p>
+				<img src="res/img/static/arrowDown.png"/>
+			</div>
+		</div>
+		
+		<!-- Dom Content End -->
+	</body>
+	<script src="res/libs/jquery/jquery.min.js"></script>
+	<script>
+		$(function() {
+			Init();
+
+			function Init() {
+				events();
+			}
+
+			function events() {
+
+				$('.toCenter').click(function() {
+					location.href = 'center.html';
+				})
+			}
+		})
+	</script>
+
+</html>

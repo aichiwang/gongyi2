@@ -1,0 +1,88 @@
+@charset"UTF-8";
+@import "common/common";
+
+/*好友详情页*/
+
+.wrap {
+    width: 13.2rem;
+    margin: 1.04rem auto 0;
+    color: #444;
+    .top{
+        h5{
+            font-size: 0.72rem;
+            i{
+                display: inline-block;
+                width: 1.94rem;
+                height: 0.74rem;
+                background: #F97B26;
+                color: #fff;
+                font-size: 0.52rem;
+                text-align: center;
+                line-height: 0.74rem;
+                border-radius: 0.1rem;
+                margin-left: 0.4rem;
+            }
+        }
+    }
+    .score{
+        height: 3.9rem;
+        margin: 1rem 0 1.3rem;
+        .confirm,.unconfirm{
+            display: inline-block;
+            width: 5rem;
+            height: 2.7rem;
+            padding: 0.6rem;
+            box-shadow: 0 0 0.5rem #ddd;
+            border-radius: 0.54rem;
+            color: #999;
+            line-height: 0.8rem;
+            i{
+                color: #444;
+                font-weight: bold;
+            }
+        }
+        .unconfirm{
+            margin-left: 0.5rem;
+            .til{
+                color: #f97b26;
+            }
+        }
+    }
+    .history{
+        color: #999;
+        font-size: 0.52rem;
+    }
+    .list{
+        margin-top: 0.6rem;
+        .item{
+            position: relative;
+            height: 3rem;
+            box-shadow: 0 0 0.5rem #ddd;
+            border-radius: 0.54rem;
+            margin-bottom: 0.6rem;
+            h5{
+                padding: 0.6rem 0.6rem 0;
+                font-size: 0.6rem;
+            }
+            p{
+                padding: 0.28rem 0.6rem 0;
+                color: #999999;
+                i{
+                    color: #000;
+                }
+            }
+            .viewCard{
+                position: absolute;
+                top: 0.4rem;
+                right: 0.6rem;
+                width: 3.3rem;
+                height: 1.06rem;
+                border-radius: 0.53rem;
+                text-align: center;
+                line-height: 1.06rem;
+                color: #999;
+                border: 1px solid #ccc;
+            }
+        }
+    }
+}

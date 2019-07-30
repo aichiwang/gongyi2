@@ -1,0 +1,60 @@
+@charset"UTF-8";
+@import "common/common";
+
+/*好友详情页*/
+
+.wrap {
+//  text-align: center;
+    .tab{
+        width: 13.6rem;
+        margin: 0 auto;
+        .item{
+            display: inline-block;
+            margin-right: 0.7rem;
+            line-height: 2rem;
+            border-top: 0.1rem solid transparent;
+            font-size: 0.6rem;
+        }
+        .item.cur{
+            border-color: #F97B26;
+        }
+    }
+    .skillCon{
+        position: relative;
+        width: 11.6rem;
+        height: 20.6rem;
+        margin: 0 auto;
+        padding: 0 0.8rem;
+        box-shadow: 0 0 0.5rem #ddd;
+        border-radius: 0.54rem;
+        h5{
+            font-size: 0.72rem;
+            font-weight: bold;
+            line-height: 2.2rem;
+        }
+        img{
+            width: 100%;
+            height: 5.6rem;
+            margin: 20px 0;
+            background: #dcdcdc;
+        }
+        p{
+            font-size: 0.52rem;
+            line-height: 0.9rem;
+        }
+        .joinBtn{
+            position: absolute;
+            bottom: 1.3rem;
+            left: 50%;
+            width: 6.6rem;
+            height: 1.8rem;
+            margin-left: -3.3rem;
+            background: #F97B26;
+            border-radius: 0.9rem;
+            line-height: 1.8rem;
+            color: #fff;
+            font-size: 0.64rem;
+            text-align: center;
+        }
+    }
+}

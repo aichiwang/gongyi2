@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no" />
+		<title>完善个人信息</title>
+		<link rel="stylesheet" href="res/css/userinfo.css">
+		<script>
+			function setRem() {
+				document.documentElement.style.fontSize = document.documentElement.clientWidth / 15 + 'px';
+			}
+			window.onresize = setRem;
+			setRem();
+		</script>
+	</head>
+
+	<body>
+		<div class="wrap">
+			<div class="area">
+				<span>请选择地址</span>
+				<select id="province_selector" class="bd-filter__select"></select>
+				<select id="city_selector" class="bd-filter__select"></select>
+				<select id="district_selector" class="bd-filter__select"></select>
+			</div>
+			<input type="text" name="" id="" value="" placeholder="请选择高校"/>
+			<input type="text" name="" id="" value="" placeholder="请输入院系"/>
+			<div class="date">
+				请选择年份
+				<input type="date" name="" id="" value="" placeholder="请选择年份"/>
+			</div>
+			<input type="text" name="" id="" value="" placeholder="请输入专业"/>
+			<input type="text" name="" id="" value="" placeholder="请输入中文姓名"/>
+			<input type="text" name="" id="" value="" placeholder="请输入英文姓名"/>
+			<input type="text" name="" id="" value="" placeholder="请输入邮箱"/>
+			<div class="subBtn">提交</div>
+		</div>
+
+		<!-- Dom Content End -->
+	</body>
+	<script src="res/libs/jquery/jquery.min.js"></script>
+	<script src="res/libs/areas.js"></script>
+	<script>
+		$(function() {
+			Init();
+
+			function Init() {
+				addressInit('province_selector', 'city_selector', 'district_selector');
+				events();
+			}
+
+			function events() {
+				
+				$('.date').click(function(){
+					$(this).find('input').css('opacity',1)
+				})
+				$('.toCenter').click(function() {
+					location.href = 'center.html';
+				})
+			}
+		})
+	</script>
+
+</html>

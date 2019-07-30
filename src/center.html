@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no" />
+		<title>个人中心</title>
+		<link rel="stylesheet" href="res/css/center.css">
+		<script>
+			function setRem() {
+				document.documentElement.style.fontSize = document.documentElement.clientWidth / 15 + 'px';
+			}
+			window.onresize = setRem;
+			setRem();
+		</script>
+	</head>
+
+	<body>
+		<div class="wrap">
+			<div class="userInfo">
+				<div class="uImg">
+					<img src="res/img/static/selected.png"/>
+				</div>
+				<p>里配齐</p>
+			</div>
+			<div class="userData">
+				<div class="left">
+					<p>50</p>
+					<span>服务时长</span>
+					<i>时</i>
+				</div>
+				<div class="right">
+					<p>78700</p>
+					<span>筹款金额</span>
+					<i>元</i>
+				</div>
+				<i class="division"></i>
+			</div>
+			<div class="links">
+				<a href="answer.html">
+					<img src="res/img/static/centerIcon1.png"/>
+					<span>常见问题</span>
+				</a>
+				<a href="answer.html">
+					<img src="res/img/static/centerIcon2.png"/>
+					<span>参加考试</span>
+				</a>
+				<a href="learncenter.html">
+					<img src="res/img/static/centerIcon3.png"/>
+					<span>学习中心</span>
+				</a>
+				<a href="scorein.html">
+					<img src="res/img/static/centerIcon4.png"/>
+					<span>签到签退</span>
+				</a>
+				<a href="scorein.html">
+					<img src="res/img/static/centerIcon5.png"/>
+					<span>成绩录入</span>
+				</a>
+				<a href="answer.html">
+					<img src="res/img/static/centerIcon6.png"/>
+					<span>我的成绩</span>
+				</a>
+			</div>
+			<div class="btn">
+				<div class="modify">信息修改</div>
+				<div class="admin">小组管理</div>
+			</div>
+		</div>
+		
+		<div class="alert" style="display: none;">
+			<div class="cover"></div>
+			<div class="content">
+				<h5>活动签到</h5>
+				<input type="text" placeholder="请输入签到活动码"/>
+				<input type="text" placeholder="获取签到活动名称"/>
+				<input type="text" placeholder="获取位置信息"/>
+				<div class="signIn">打卡签到</div>
+			</div>
+		</div>
+		<div class="alert" style="display: none;">
+			<div class="cover"></div>
+			<div class="content short">
+				<h5>活动签退</h5>
+				<input type="text" placeholder="活动编码"/>
+				<input type="text" placeholder="活动名称"/>
+				<div class="signIn">打卡签退</div>
+			</div>
+		</div>
+
+		<!-- Dom Content End -->
+	</body>
+	<script src="res/libs/jquery/jquery.min.js"></script>
+	<script>
+		$(function() {
+			Init();
+
+			function Init() {
+				events();
+			}
+
+			function events() {
+
+				$('.toCenter').click(function() {
+					location.href = 'center.html';
+				})
+			}
+		})
+	</script>
+
+</html>
