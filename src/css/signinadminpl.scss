@@ -15,11 +15,11 @@
             width: 1.68rem;
             height: 1.1rem;
             padding-left: 1.12rem;
-            background: url(../res/img/static/selectAll2.png);
+            background: url(../img/static/selectAll2.png);
             background-size: contain;
         }
         .selectAllBtn.cur{
-            background: url(../res/img/static/selectAll.png);
+            background: url(../img/static/selectAll.png);
             background-size: contain;
             color: #fff;
         }
@@ -60,7 +60,7 @@
                     margin-right: 0.16rem;
                 }
                 i.cur{
-                    background: url(../res/img/static/selected.png);
+                    background: url(../img/static/selected.png);
                     background-size: contain;
                 }
             }

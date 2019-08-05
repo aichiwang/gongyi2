@@ -23,7 +23,7 @@
 				<div class="uImg">
 					<img src="res/img/static/selected.png"/>
 				</div>
-				<p>里配齐</p>
+				<p>0</p>
 			</div>
 			<div class="userData">
 				<div class="left">
@@ -98,13 +98,37 @@
 			Init();
 
 			function Init() {
+				initInfo();
 				events();
 			}
-
+			
+			function initInfo(){
+				$.ajax({
+					type:"post",
+					url:"http://shanxing100.fupin.org.cn/api/user/center",
+					data: {
+						id: 179807
+					},
+					async:true,
+					dataType: 'jsonp',
+					success: function(res){
+						console.log(res)
+						$('.uImg img').attr('src',res.data.avatar)
+						$('.userInfo p').html(res.data.username)
+						$('.userData .left p').html(res.data.duration)
+						$('.userData .right p').html(res.data.money)
+						$('.userInfo p').html(res.data.username)
+						$('.userInfo p').html(res.data.username)
+					}
+				});
+			}
 			function events() {
 
-				$('.toCenter').click(function() {
-					location.href = 'center.html';
+				$('.modify').click(function() {
+					location.href = 'userinfo.html';
+				})
+				$('.admin').click(function() {
+					location.href = 'teamadmin.html';
 				})
 			}
 		})

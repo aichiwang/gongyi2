@@ -25,16 +25,16 @@
 				<select id="city_selector" class="bd-filter__select"></select>
 				<select id="district_selector" class="bd-filter__select"></select>
 			</div>
-			<input type="text" name="" id="" value="" placeholder="请选择高校"/>
-			<input type="text" name="" id="" value="" placeholder="请输入院系"/>
+			<input type="text" name="" id="school" value="" placeholder="请选择高校"/>
+			<input type="text" name="" id="department" value="" placeholder="请输入院系"/>
 			<div class="date">
 				请选择年份
-				<input type="date" name="" id="" value="" placeholder="请选择年份"/>
+				<input type="date" name="" id="year" value="" placeholder="请选择年份"/>
 			</div>
-			<input type="text" name="" id="" value="" placeholder="请输入专业"/>
-			<input type="text" name="" id="" value="" placeholder="请输入中文姓名"/>
-			<input type="text" name="" id="" value="" placeholder="请输入英文姓名"/>
-			<input type="text" name="" id="" value="" placeholder="请输入邮箱"/>
+			<input type="text" name="" id="major" value="" placeholder="请输入专业"/>
+			<input type="text" name="" id="chineseName" value="" placeholder="请输入中文姓名"/>
+			<input type="text" name="" id="englishName" value="" placeholder="请输入英文姓名"/>
+			<input type="text" name="" id="email" value="" placeholder="请输入邮箱"/>
 			<div class="subBtn">提交</div>
 		</div>
 
@@ -48,16 +48,76 @@
 
 			function Init() {
 				addressInit('province_selector', 'city_selector', 'district_selector');
+				initInfo();
 				events();
 			}
+			
+			function initInfo(){
+				$.ajax({
+					type:"post",
+					url:"http://shanxing100.fupin.org.cn/api/user/center",
+					data: {
+						id: 179807
+					},
+					async:true,
+					dataType: 'jsonp',
+					success: function(res){
+						console.log(res)
+						$('#school').val(res.data.school);
+						$('#department').val(res.data.department);
+						$('#major').val(res.data.major);
+						$('#chineseName').val(res.data.username);
+						$('#englishName').val(res.data.english_name);
+						$('#email').val(res.data.email);
+//						$('#province_selector [value=' + res.data.province + ']')[0].selected = true;
+//						$('#city_selector [value=' + res.data.city + ']')[0].selected = true;
+//						$('#district_selector [value=' + res.data.province + ']')[0].selected = true;
+					}
+				});
+			}
+			
 
 			function events() {
 				
-				$('.date').click(function(){
-					$(this).find('input').css('opacity',1)
-				})
-				$('.toCenter').click(function() {
-					location.href = 'center.html';
+				$('.subBtn').click(function() {
+					var province = $('#province_selector').val();
+					var city = $('#city_selector').val();
+					var school = $('#school').val();
+					var department = $('#department').val();
+					var enroll_year = $('#phoneNum').val();
+					var major = $('#phoneNum').val();
+					var username = $('#phoneNum').val();
+					var english_name = $('#phoneNum').val();
+					var email = $('#passWord').val();
+					var id_type = $('#passWord').val();
+					var id_no = $('#passWord').val();
+					
+					if(!phoneNum){
+						globalMes('请输入手机号')
+					}else if(!passWord){
+						globalMes('请输入密码')
+					}else{
+						$.ajax({
+							type:"post",
+							url:"http://shanxing100.fupin.org.cn/api/user/updatepassword",
+							async:true,
+							dataType:'jsonp',
+							data:{
+								old_password: passWord,
+								new_password: phoneNum,
+								renew_password: phoneNum,
+							},
+							success: function(res){
+								console.log(res)
+								if(res.code == 0){
+									globalMes('登陆成功!',function(){
+										location.href = 'center.html'
+									})
+								}
+							}
+						});
+					}
+					
 				})
 			}
 		})

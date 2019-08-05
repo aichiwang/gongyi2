@@ -21,10 +21,10 @@
 		<div class="wrap">
 			<div class="content">
 				<div class="phone">
-					<input type="text" name="" id="" value="" placeholder="请输入手机号码"/>
+					<input type="text" name="" id="phoneNum" value="" placeholder="请输入手机号码"/>
 				</div>
 				<div class="password">
-					<input type="text" name="" id="" value="" placeholder="请输入密码"/>
+					<input type="password" name="" id="passWord" value="" placeholder="请输入密码"/>
 				</div>
 				<p class="forget">忘记密码？</p>
 				<div class="login">登录</div>
@@ -45,9 +45,55 @@
 
 			function events() {
 
-				$('.toCenter').click(function() {
-					location.href = 'center.html';
+				$('.login').click(function() {
+					var phoneNum = $('#phoneNum').val();
+					var passWord = $('#passWord').val();
+					
+					if(!phoneNum){
+						globalMes('请输入手机号')
+					}else if(!passWord){
+						globalMes('请输入密码')
+					}else{
+						$.ajax({
+							type:"post",
+							url:"http://shanxing100.fupin.org.cn/api/user/login",
+							async:true,
+							dataType:'jsonp',
+							data:{
+								password: passWord,
+								account: phoneNum
+							},
+							success: function(res){
+								console.log(res)
+								if(res.code == 0){
+									globalMes('登陆成功!',function(){
+										location.href = 'center.html'
+									})
+								}
+							}
+						});
+					}
+					
 				})
+				
+				$('.regist').click(function() {
+					location.href = 'regist.html'
+				})
+				
+				$('.forget').click(function() {
+					location.href = 'password.html'
+				})
+				
+			}
+			
+			function globalMes(txt,callback) {
+				$('body').append('<div class="globalmes">' + txt + '</div>')
+				setTimeout(function() {
+					$('.globalmes').remove();
+					if(callback){
+						callback();
+					}
+				}, 2000)
 			}
 		})
 	</script>

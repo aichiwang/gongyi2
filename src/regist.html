@@ -5,7 +5,7 @@
 		<meta name="renderer" content="webkit">
 		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no" />
-		<title>找回密码</title>
+		<title>注册</title>
 		<link rel="stylesheet" href="res/css/regist.css">
 		<script>
 			function setRem() {
@@ -18,13 +18,14 @@
 
 	<body>
 		<div class="wrap">
-			<input type="text" name="" id="" value="" placeholder="请输入手机号"/>
-			<select name="">
-				<option value="">选择证件类型</option>
+			<input type="text" name="" id="phoneNum" value="" placeholder="请输入手机号"/>
+			<select name="" id="cardType">
+				<option value="身份证">选择证件类型</option>
+				<option value="身份证">身份证</option>
 			</select>
-			<input type="text" name="" id="" value="" placeholder="请输入证件号码"/>
-			<input type="text" name="" id="" value="" placeholder="请输入密码"/>
-			<input type="text" name="" id="" value="" placeholder="再次输入密码"/>
+			<input type="text" name="" id="cardNum" value="" placeholder="请输入证件号码"/>
+			<input type="text" name="" id="passWord" value="" placeholder="请输入密码"/>
+			<input type="text" name="" id="passWord2" value="" placeholder="再次输入密码"/>
 			<div class="subBtn">注册</div>
 		</div>
 
@@ -41,9 +42,58 @@
 
 			function events() {
 
-				$('.toCenter').click(function() {
-					location.href = 'center.html';
+				$('.subBtn').click(function() {
+					var phoneNum = $('#phoneNum').val();
+					var cardType = $('#cardType').val();
+					var cardNum = $('#cardNum').val();
+					var passWord = $('#passWord').val();
+					var passWord2 = $('#passWord2').val();
+					
+					if(!phoneNum){
+						globalMes('请输入手机号')
+					}else if(!cardType){
+						globalMes('请输入证件类型')
+					}else if(!cardNum){
+						globalMes('请输入证件号')
+					}else if(!passWord){
+						globalMes('请输入密码')
+					}else if(!passWord2){
+						globalMes('请在此输入密码')
+					}else{
+						$.ajax({
+							type:"post",
+							url:"http://shanxing100.fupin.org.cn/api/user/registe",
+							async:true,
+							dataType:'jsonp',
+							data:{
+								id_type: cardType,
+								id_no: cardNum,
+								password: passWord,
+								confirm_password: passWord2,
+								phone: phoneNum
+							},
+							success: function(res){
+//								console.log(res)
+								if(res.code == 0){
+									globalMes('注册成功！',function(){
+										location.href = 'login.html'
+									})
+								}
+							}
+						});
+					}
+					
 				})
+			}
+			
+			function globalMes(txt,callback) {
+				$('body').append('<div class="globalmes">' + txt + '</div>')
+				setTimeout(function() {
+					$('.globalmes').remove();
+					if(callback){
+						callback();
+					}
+				}, 2000)
 			}
 		})
 	</script>
