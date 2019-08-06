@@ -21,9 +21,9 @@
 		<div class="wrap">
 			<input type="text" name="" id="" value="" placeholder="编号"/>
 			<input type="text" name="" id="" value="" placeholder="活动名称"/>
-			<input type="text" name="" id="" value="" placeholder="筹款金额"/>
-			<input type="text" name="" id="" value="" placeholder="订单类型"/>
-			<input type="text" name="" id="" value="" placeholder="订单编号"/>
+			<input type="text" name="" id="money" value="" placeholder="筹款金额"/>
+			<input type="text" name="" id="order_type" value="" placeholder="订单类型"/>
+			<input type="text" name="" id="orderno" value="" placeholder="订单编号"/>
 			<div class="subBtn">提交</div>
 		</div>
 
@@ -40,9 +40,49 @@
 
 			function events() {
 
-				$('.toCenter').click(function() {
-					location.href = 'center.html';
+				$('.subBtn').click(function() {
+					
+					var money = $('#money').val();
+					var order_type = $('#order_type').val();
+					var orderno = $('#orderno').val();
+					
+					if(!money){
+						globalMes('请输入筹款金额')
+					}else if(!order_type){
+						globalMes('请输入订单类型')
+					}else if(!orderno){
+						globalMes('请输入订单编号')
+					}else{
+						$.ajax({
+							type:"post",
+							url:"http://shanxing100.fupin.org.cn/api/score/addscore",
+							async:true,
+							dataType:'jsonp',
+							data:{
+								money: money,
+								order_type: order_type,
+								orderno: orderno,
+							},
+							success: function(res){
+								console.log(res)
+								if(res.code == 0){
+									
+								}
+							}
+						});
+					}
+					
 				})
+			}
+			
+			function globalMes(txt,callback) {
+				$('body').append('<div class="globalmes">' + txt + '</div>')
+				setTimeout(function() {
+					$('.globalmes').remove();
+					if(callback){
+						callback();
+					}
+				}, 2000)
 			}
 		})
 	</script>

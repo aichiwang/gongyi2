@@ -25,13 +25,13 @@
 			<div class="score">
 				<div class="confirm">
 					<p>已确认</p>
-					<p>服务时长 : <i>38时</i></p>
-					<p>筹款金额 : <i>7889元</i></p>
+					<p>服务时长 : <i id="confirmDuration">38时</i></p>
+					<p>筹款金额 : <i id="confirmMoney">7889元</i></p>
 				</div>
 				<div class="unconfirm">
 					<p class="til">待审核</p>
-					<p>服务时长 : <i>38时</i></p>
-					<p>筹款金额 : <i>7789元</i></p>
+					<p>服务时长 : <i id="unCfDuration">38时</i></p>
+					<p>筹款金额 : <i id="unCfMoney">7789元</i></p>
 				</div>
 			</div>
 			<p class="history">历史成绩</p>
@@ -83,9 +83,44 @@
 			Init();
 
 			function Init() {
+				getScore();
 				events();
 			}
-
+			
+			function getScore(){
+				$.ajax({
+					type:"post",
+					url:"http://shanxing100.fupin.org.cn/api/score/getmyscore",
+					async:true,
+					dataType: 'jsonp',
+					success: function(res){
+//						console.log(res)
+						if(res.code == 0){
+							$('#confirmDuration').html(res.data.confirmDuration +'时')
+							$('#confirmMoney').html(res.data.confirmMoney +'元')
+							$('#unCfDuration').html(res.data.unCfDuration +'时')
+							$('#unCfMoney').html(res.data.unCfMoney +'元')
+						}
+					}
+				});
+				
+				$.ajax({
+					type:"post",
+					url:"http://shanxing100.fupin.org.cn/api/score/getscorelist",
+					async:true,
+					dataType: 'jsonp',
+					success: function(res){
+						console.log(res)
+						if(res.code == 0){
+							$('#confirmDuration').html(res.data.confirmDuration +'时')
+							$('#confirmMoney').html(res.data.confirmMoney +'元')
+							$('#unCfDuration').html(res.data.unCfDuration +'时')
+							$('#unCfMoney').html(res.data.unCfMoney +'元')
+						}
+					}
+				});
+				
+			}
 			function events() {
 
 				$('.toCenter').click(function() {
