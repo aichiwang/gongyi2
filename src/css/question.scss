@@ -1,0 +1,37 @@
+@charset"UTF-8";
+@import "common/common";
+
+/*好友详情页*/
+
+.wrap {
+    width: 13.2rem;
+    margin: 1.04rem auto 0;
+    .list{
+        margin-top: 0.6rem;
+        .item{
+            position: relative;
+            box-shadow: 0 0 0.5rem #ddd;
+            border-radius: 0.54rem;
+            margin-bottom: 0.6rem;
+            padding: 0.6rem 0.8rem;
+            .question{
+                font-size: 0.72rem;
+                font-weight: bold;
+            }
+            .answer{
+                margin-top: 0.5rem;
+                font-size: 0.52rem;
+                line-height: 0.8rem;
+            }
+        }
+    }
+    .loadMore{
+        display: none;
+        text-align: center;
+        font-size: 0.52rem;
+        color: #ccc;
+        img{
+            width: 0.42rem;
+        }
+    }
+}

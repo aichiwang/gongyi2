@@ -39,7 +39,7 @@
 				<i class="division"></i>
 			</div>
 			<div class="links">
-				<a href="answer.html">
+				<a href="question.html">
 					<img src="res/img/static/centerIcon1.png"/>
 					<span>常见问题</span>
 				</a>
@@ -113,8 +113,8 @@
 					dataType: 'jsonp',
 					success: function(res){
 						console.log(res)
-						$('.uImg img').attr('src',res.data.avatar)
-						$('.userInfo p').html(res.data.username)
+						$('.uImg img').attr('src',res.data.avatar||'res/img/static/selected.png')
+						$('.userInfo p').html(res.data.username||'善行萌新')
 						$('.userData .left p').html(res.data.duration)
 						$('.userData .right p').html(res.data.money)
 						$('.userInfo p').html(res.data.username)

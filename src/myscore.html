@@ -25,18 +25,18 @@
 			<div class="score">
 				<div class="confirm">
 					<p>已确认</p>
-					<p>服务时长 : <i id="confirmDuration">38时</i></p>
-					<p>筹款金额 : <i id="confirmMoney">7889元</i></p>
+					<p>服务时长 : <i id="confirmDuration">0时</i></p>
+					<p>筹款金额 : <i id="confirmMoney">0元</i></p>
 				</div>
 				<div class="unconfirm">
 					<p class="til">待审核</p>
-					<p>服务时长 : <i id="unCfDuration">38时</i></p>
-					<p>筹款金额 : <i id="unCfMoney">7789元</i></p>
+					<p>服务时长 : <i id="unCfDuration">0时</i></p>
+					<p>筹款金额 : <i id="unCfMoney">0元</i></p>
 				</div>
 			</div>
 			<p class="history">历史成绩</p>
 			<div class="list">
-				<div class="item">
+				<!--<div class="item">
 					<h5>善行100好好好</h5>
 					<p>
 						服务时长:&nbsp&nbsp<i>89时</i>
@@ -44,34 +44,7 @@
 						筹款金额:&nbsp&nbsp<i>10000元</i>
 					</p>
 					<div class="viewCard">查看证书</div>
-				</div>
-				<div class="item">
-					<h5>善行100好好好</h5>
-					<p>
-						服务时长:&nbsp&nbsp<i>89时</i>
-						&nbsp&nbsp&nbsp&nbsp
-						筹款金额:&nbsp&nbsp<i>10000元</i>
-					</p>
-					<div class="viewCard">查看证书</div>
-				</div>
-				<div class="item">
-					<h5>善行100好好好</h5>
-					<p>
-						服务时长:&nbsp&nbsp<i>89时</i>
-						&nbsp&nbsp&nbsp&nbsp
-						筹款金额:&nbsp&nbsp<i>10000元</i>
-					</p>
-					<div class="viewCard">查看证书</div>
-				</div>
-				<div class="item">
-					<h5>善行100好好好</h5>
-					<p>
-						服务时长:&nbsp&nbsp<i>89时</i>
-						&nbsp&nbsp&nbsp&nbsp
-						筹款金额:&nbsp&nbsp<i>10000元</i>
-					</p>
-					<div class="viewCard">查看证书</div>
-				</div>
+				</div>-->
 			</div>
 		</div>
 		
@@ -112,10 +85,23 @@
 					success: function(res){
 						console.log(res)
 						if(res.code == 0){
-							$('#confirmDuration').html(res.data.confirmDuration +'时')
-							$('#confirmMoney').html(res.data.confirmMoney +'元')
-							$('#unCfDuration').html(res.data.unCfDuration +'时')
-							$('#unCfMoney').html(res.data.unCfMoney +'元')
+							if(res.data.list.length == 0){
+								$('.list').html('<div style="text-align: center;">空<div>');
+							}else{
+								var html = "";
+								for(var i =0;i<res.data.list.length;i++){
+									html +='<div class="item">'+
+										'<h5>善行100好好好</h5>'+
+										'<p>'+
+											'服务时长:&nbsp&nbsp<i>'+ res.data.list[i].duration +'时</i>'+
+											'&nbsp&nbsp&nbsp&nbsp'+
+											'筹款金额:&nbsp&nbsp<i>'+ res.data.list[i].money +'元</i>'+
+										'</p>'+
+										'<div class="viewCard">查看证书</div>'+
+									'</div>'
+								}
+								$('.list').html(html);
+							}
 						}
 					}
 				});

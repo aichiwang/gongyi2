@@ -21,25 +21,33 @@
 		<div class="wrap">
 			<div class="top">
 				<img src="../dist/res/img/static/centerIcon1.png"/>
-				<span>李沛绮</span>
+				<span></span>
 			</div>
 			<div class="content">
 				<div class="list">
 					<div class="item">
-						<img src="res/img/static/indexIcon1.jpg"/>
-						<p>项目介绍</p>
+						<a href="introduce.html">
+							<img src="res/img/static/indexIcon1.jpg"/>
+							<p>项目介绍</p>
+						</a>
 					</div>
 					<div class="item">
+						<a href="login.html">
 						<img src="res/img/static/indexIcon2.jpg"/>
 						<p>报名登录</p>
+						</a>
 					</div>
 					<div class="item">
+						<a href="rank.html">
 						<img src="res/img/static/indexIcon3.jpg"/>
 						<p>成绩排名</p>
+						</a>
 					</div>
 					<div class="item">
+						<a href="question.html">
 						<img src="res/img/static/indexIcon4.jpg"/>
 						<p>常见问答</p>
+						</a>
 					</div>
 				</div>
 				<div class="superman"></div>
@@ -54,9 +62,40 @@
 			Init();
 
 			function Init() {
+				initInfo();
 				events();
 			}
-
+			
+			function initInfo(){
+				$.ajax({
+					type:"post",
+					url:"http://shanxing100.fupin.org.cn/api/user/detail",
+					async:true,
+					dataType: 'jsonp',
+					success: function(res){
+						console.log(res)
+						if(res.code == 6){
+							$('.top span').html('未登录')
+						}else if(res.code ==0){
+							$('.top span').html(res.data.username||'善行萌新')
+							$('.top img').attr('src',res.data.avatar||'res/img/static/centerIcon1.png')
+						}else{
+							globalMes(res.msg)
+						}
+					}
+				});
+			}
+			
+			function globalMes(txt,callback) {
+				$('body').append('<div class="globalmes">' + txt + '</div>')
+				setTimeout(function() {
+					$('.globalmes').remove();
+					if(callback){
+						callback();
+					}
+				}, 2000)
+			}
+			
 			function events() {
 
 				$('.toCenter').click(function() {

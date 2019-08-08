@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no" />
+		<title>排行榜</title>
+		<link rel="stylesheet" href="res/css/rank.css">
+		<script>
+			function setRem() {
+				document.documentElement.style.fontSize = document.documentElement.clientWidth / 15 + 'px';
+			}
+			window.onresize = setRem;
+			setRem();
+		</script>
+	</head>
+
+	<body>
+		<div class="wrap">
+			<div class="content">
+				<div class="tab">
+					<span class="cur" data-info="">个人成绩</span>
+					<span data-info="organ">社团成绩</span>
+				</div>
+				<div class="rankType">
+					<span class="cur" data-info="week">周排名</span>
+					<span data-info="year">总排名</span>
+				</div>
+				<div class="listTil">
+					<span class="rank">名次</span>
+					<span class="school">学校</span>
+					<span class="nick">姓名</span>
+					<span class="time">服务时长</span>
+					<span class="money">筹款金额</span>
+				</div>
+				<div class="list">
+					<!--<div class="item">
+						<span class="rank">1</span>
+						<span class="school">四川大学</span>
+						<span class="nick">黎婆欸起</span>
+						<span class="time">78</span>
+						<span class="money">1000</span>
+					</div>-->
+				</div>
+			</div>
+		</div>
+
+		<!-- Dom Content End -->
+	</body>
+	<script src="res/libs/jquery/jquery.min.js"></script>
+	<script>
+		$(function() {
+			Init();
+
+			function Init() {
+				getRank();
+				events();
+			}
+			
+			function getRank(type,timetype){
+				$.ajax({
+					type:"post",
+					url:"http://shanxing100.fupin.org.cn/api/rank/getranklist",
+					data: {
+						page: 1,
+						perpage: 100,
+						type: type,
+						timetype: timetype,
+					},
+					async:true,
+					dataType: 'jsonp',
+					success: function(res){
+						console.log(res)
+						if(res.code ==0){
+							if(res.data.list.length == 0){
+								$('.list').html('');
+							}else{
+								var html = '';
+								for(var i =0;i<res.data.list.length;i++){
+									html += '<div class="item">'+
+												'<span class="rank">'+ (i+1) +'</span>'+
+												'<span class="school">'+ res.data.list[i].school +'</span>'+
+												'<span class="nick">'+ res.data.list[i].username +'</span>'+
+												'<span class="time">'+ res.data.list[i].duration +'</span>'+
+												'<span class="money">'+ res.data.list[i].score +'</span>'+
+											'</div>'
+								}
+								$('.list').html(html);
+							}
+						}
+					}
+				});	
+			}
+			
+			function events() {
+
+				$('.tab span').click(function() {
+					$(this).addClass('cur').siblings().removeClass('cur');
+					getRank($(this).attr('data-info'),$('.rankType span.cur').attr('data-info'))
+				})
+				
+				$('.rankType span').click(function() {
+					$(this).addClass('cur').siblings().removeClass('cur');
+					getRank($('.tab span.cur').attr('data-info'),$(this).attr('data-info'))
+				})
+			}
+		})
+	</script>
+
+</html>

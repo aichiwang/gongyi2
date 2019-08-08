@@ -46,8 +46,11 @@
 
 			function events() {
 
-				$('.toCenter').click(function() {
-					location.href = 'center.html';
+				$('.joinBtn').click(function() {
+					location.href = 'answer.html';
+				})
+				$('.tab .item').click(function() {
+					$(this).addClass('cur').siblings().removeClass('cur');
 				})
 			}
 		})

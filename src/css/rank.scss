@@ -1,0 +1,128 @@
+@charset"UTF-8";
+@import "common/common";
+
+/*好友详情页*/
+html,body{
+    width: 100%;
+    height: 100%;
+}
+
+
+input::-webkit-input-placeholder{
+  color: #fff;
+}
+
+
+.wrap {
+    width: 100%;
+    height: 100%;
+    .content{
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-radius: 0.9rem;
+        background: #fff;
+        .tab{
+            text-align: center;
+            span{
+                display: inline-block;
+                width: 2.4rem;
+                line-height: 2rem;
+                font-size: 0.6rem;
+                border-top: 0.1rem solid transparent;
+                margin: 0 1.5rem;
+                cursor: pointer;
+            }
+            .cur{
+                border-top: 0.1rem solid #F97B26;
+                font-weight: bold;
+            }
+        }
+        .rankType{
+            text-align: center;
+            span{
+                display: inline-block;
+                width: 4.5rem;
+                height: 1.36rem;
+                border-radius: 0.68rem;
+                border: 1px solid #CCCCCC;
+                text-align: center;
+                line-height: 1.36rem;
+                font-size: 0.52rem;
+                color: #999999;
+                margin: 0.4rem 0.8rem 0;
+            }
+            .cur{
+                color: #F97B26;
+                border: 1px solid #F97B26;
+            }
+        }
+        .listTil{
+            padding: 0 0.9rem;
+            line-height: 1.6rem;
+            font-size: 0.52rem;
+            color: #999999;
+            span{
+                display: inline-block;
+                text-align: center;
+            }
+            .rank{
+                width: 2rem;
+            }
+            .school{
+                width: 2rem;
+            }
+            .nick{
+                width: 2rem;
+                text-align: right;
+            }
+            .time{
+                width: 3rem;
+                text-align: right;
+            }
+            .money{
+                width: 3rem;
+                text-align: right;
+            }
+        }
+        .list{
+            font-size: 0.52rem;
+            .item{
+                width: 13.2rem;
+                height: 2rem;
+                line-height: 2rem;
+                margin: 0 auto;
+                span{
+                    display: inline-block;
+                    text-align: center;
+                }
+                .rank{
+                    width: 2rem;
+                }
+                .school{
+                    width: 3rem;
+                }
+                .nick{
+                    width: 3rem;
+                }
+                .time{
+                    width: 2rem;
+                }
+                .money{
+                    width: 2rem;
+                }
+            }
+        }
+        .superman{
+            width: 5.12rem;
+            height: 11.18rem;
+            background: url(../img/static/superman.png);
+            background-size: 100% 100%;
+            position: absolute;
+            top: -5.7rem;
+            right: 0;
+        }
+    }  
+}

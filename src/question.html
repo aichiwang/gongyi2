@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no" />
+		<title>常见问题</title>
+		<link rel="stylesheet" href="res/css/question.css">
+		<script>
+			function setRem() {
+				document.documentElement.style.fontSize = document.documentElement.clientWidth / 15 + 'px';
+			}
+			window.onresize = setRem;
+			setRem();
+		</script>
+	</head>
+
+	<body>
+		<div class="wrap">
+			<div class="list">
+				<div class="item">
+					<p class="question">Q: 如何报名善行100志愿者？</p>
+					<p class="answer">A: 首先需要了解善行100项目内容，如果您所在学校有社团承办善行100活动，则可直接点击我要报名按要求填写报名信息即可。如果您所在的学校没有社团承办该活动，则无法成为善行100志愿者。</p>
+				</div>
+				<div class="item">
+					<p class="question">Q: 直接点击我要报名提交成功就算报名成功了吗？</p>
+					<p class="answer">A: 不是。按要求填写信息提交成功后，会由该校负责善行100活动的社团进行审核或者进行相应面试，通过后方可成为善行100志愿者。</p>
+				</div>
+				<div class="item">
+					<p class="question">Q: 社团怎么报名善行100啊？</p>
+					<p class="answer">A: 如果是社团要报名善行100，需要在每年的6月份在公益未来官网进行申请，经善行100项目组审核通过后方可承办善行100项目学校。如未来得及报名，可申请与同城市善行100学校合办。</p>
+				</div>
+				<div class="item">
+					<p class="question">Q: 善行100需要志愿者做什么？</p>
+					<p class="answer">A: 善行100是一个倡导全民参与公益的活动，成为善行100志愿者需要自愿奉贤时间和精力，在该校善行100项目负责人的统一管理下利用周末时间在善行100公益体验站（邮局或商超）进行公益宣传和筹款，并且需要遵守项目组的相关制度。</p>
+				</div>
+			</div>
+			<div class="loadMore">
+				<p>点击继续加载</p>
+				<img src="res/img/static/arrowDown.png"/>
+			</div>
+		</div>
+		
+		<!-- Dom Content End -->
+	</body>
+	<script src="res/libs/jquery/jquery.min.js"></script>
+	<script>
+		$(function() {
+			Init();
+
+			function Init() {
+				events();
+			}
+
+			function events() {
+
+				$('.toCenter').click(function() {
+					location.href = 'center.html';
+				})
+			}
+		})
+	</script>
+
+</html>
