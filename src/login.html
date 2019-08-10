@@ -40,6 +40,7 @@
 			Init();
 
 			function Init() {
+				checkLogin();
 				events();
 			}
 
@@ -84,6 +85,21 @@
 					location.href = 'password.html'
 				})
 				
+			}
+			
+			function checkLogin(){
+				$.ajax({
+					type:"post",
+					url:"http://shanxing100.fupin.org.cn/api/user/detail",
+					async:true,
+					dataType: 'jsonp',
+					success: function(res){
+//						console.log(res)
+						if(res.code !== 6){
+							location.href = 'center.html';
+						}
+					}
+				});
 			}
 			
 			function globalMes(txt,callback) {

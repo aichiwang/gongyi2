@@ -20,8 +20,8 @@
 	<body>
 		<div class="wrap">
 			<div class="top">
-				<img src="../dist/res/img/static/centerIcon1.png"/>
-				<span>李沛绮</span>
+				<img src="../dist/res/img/static/default.jpg"/>
+				<span>善行萌新</span>
 			</div>
 			<div class="content">
 				<div class="tab">
@@ -74,9 +74,32 @@
 			Init();
 
 			function Init() {
+				initInfo();
 				events();
 			}
-
+			
+			
+			function initInfo(){
+				$.ajax({
+					type:"post",
+					url:"http://shanxing100.fupin.org.cn/api/user/detail",
+					async:true,
+					dataType: 'jsonp',
+					success: function(res){
+						console.log(res)
+						if(res.code == 6){
+							$('.top span').html('未登录')
+						}else if(res.code ==0){
+							$('.top span').html(res.data.username||'善行萌新')
+							$('.top img').attr('src',res.data.avatar||'res/img/static/default.jpg')
+						}else{
+							globalMes(res.msg)
+						}
+					}
+				});
+			}
+			
+			
 			function events() {
 
 				$('.tab span').click(function() {

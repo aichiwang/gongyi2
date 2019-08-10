@@ -91,7 +91,7 @@
 							var html = '';
 							for(var i =0;i<res.data.subjects.length;i++){
 								html += '<div class="question">'+
-										'<i class="label">'+ i +'</i>'+
+										'<i class="label">'+ (i+1) +'</i>'+
 										'<p class="ques">'+ res.data.subjects[i].title +'</p>'+
 										'<p class="answer" data-answer="A">A.'+ res.data.subjects[i].options[0].title +' <img src="res/img/static/gou.png" /></p>'+
 										'<p class="answer" data-answer="B">B.'+ res.data.subjects[i].options[1].title +' <img src="res/img/static/gou.png" /></p>'+

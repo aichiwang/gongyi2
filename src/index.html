@@ -20,7 +20,7 @@
 	<body>
 		<div class="wrap">
 			<div class="top">
-				<img src="../dist/res/img/static/centerIcon1.png"/>
+				<img src="../dist/res/img/static/default.jpg"/>
 				<span></span>
 			</div>
 			<div class="content">
@@ -78,7 +78,7 @@
 							$('.top span').html('未登录')
 						}else if(res.code ==0){
 							$('.top span').html(res.data.username||'善行萌新')
-							$('.top img').attr('src',res.data.avatar||'res/img/static/centerIcon1.png')
+							$('.top img').attr('src',res.data.avatar||'res/img/static/default.jpg')
 						}else{
 							globalMes(res.msg)
 						}

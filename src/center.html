@@ -21,18 +21,18 @@
 		<div class="wrap">
 			<div class="userInfo">
 				<div class="uImg">
-					<img src="res/img/static/selected.png"/>
+					<img src="res/img/static/default.jpg"/>
 				</div>
 				<p>0</p>
 			</div>
 			<div class="userData">
 				<div class="left">
-					<p>50</p>
+					<p>0</p>
 					<span>服务时长</span>
 					<i>时</i>
 				</div>
 				<div class="right">
-					<p>78700</p>
+					<p>0</p>
 					<span>筹款金额</span>
 					<i>元</i>
 				</div>
@@ -113,7 +113,7 @@
 					dataType: 'jsonp',
 					success: function(res){
 						console.log(res)
-						$('.uImg img').attr('src',res.data.avatar||'res/img/static/selected.png')
+						$('.uImg img').attr('src',res.data.avatar||'res/img/static/default.jpg')
 						$('.userInfo p').html(res.data.username||'善行萌新')
 						$('.userData .left p').html(res.data.duration)
 						$('.userData .right p').html(res.data.money)
