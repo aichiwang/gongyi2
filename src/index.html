@@ -76,11 +76,8 @@
 						console.log(res)
 						if(res.code == 6){
 							$('.top span').html('未登录')
-						}else if(res.code ==0){
-							$('.top span').html(res.data.username||'善行萌新')
-							$('.top img').attr('src',res.data.avatar||'res/img/static/default.jpg')
 						}else{
-							globalMes(res.msg)
+							location.href = 'center.html'
 						}
 					}
 				});
