@@ -20,8 +20,8 @@
 	<body>
 		<div class="wrap">
 			<div class="top">
-				<h5>善行100我的最爱</h5>
-				<p>活动编号：<i>43359333</i></p>
+				<h5>0</h5>
+				<p>活动编号：<i>0</i></p>
 				<div class="master">批量管理</div>
 			</div>
 			<div class="search">
@@ -29,7 +29,7 @@
 				<input type="text" name="" id="" value="" placeholder="查询"/>
 			</div>
 			<div class="list">
-				<div class="item">
+				<!--<div class="item">
 					<h5>猪配齐</h5>
 					<p>时间:&nbsp&nbsp<i>2019-07-22  10:00:55</i></p>
 					<p>地点:&nbsp&nbsp北京市海淀区中关村北一街</p>
@@ -44,12 +44,12 @@
 					<div class="operat">
 						<span>删除</span>
 					</div>
-				</div>
+				</div>-->
 			</div>
-			<div class="loadMore">
+			<!--<div class="loadMore">
 				<p>点击继续加载</p>
 				<img src="res/img/static/arrowDown.png"/>
-			</div>
+			</div>-->
 		</div>
 		
 		<!-- Dom Content End -->
@@ -60,14 +60,94 @@
 			Init();
 
 			function Init() {
+				getDetail();
+				getmyactivity();
 				events();
+				
 			}
-
+			
+			function getDetail(){
+				$.ajax({
+					type:"get",
+					url:"http://shanxing100.fupin.org.cn/api/activity/detail",
+					async:true,
+					data:{
+						activityid:1
+					},
+					dataType: 'jsonp',
+					success: function(res){
+//						console.log(res)
+						if(res.code ==0){
+							$('.top h5').html( res.data.name )
+							$('.top i').html( res.data.id )
+						}
+					}
+				});	
+			}
+			
+			function getmyactivity(){
+				$.ajax({
+					type:"post",
+					url:"http://shanxing100.fupin.org.cn/api/useractivity/getmyactivity",
+					async:true,
+					dataType: 'jsonp',
+					success: function(res){
+//						console.log(res)
+						if(res.code ==0){
+							if(res.data.list.length == 0){
+								$('.list').html('');
+							}else{
+								var html = '';
+								for(var i =0;i<res.data.list.length;i++){
+									html += '<div class="item">'+
+										'<h5>'+ res.data.list[i].name +'</h5>'+
+										'<p>时间:&nbsp&nbsp<i>'+ res.data.list[i].ctime +'</i></p>'+
+										'<p>地点:&nbsp&nbsp'+ res.data.list[i].address +'</p>'+
+										'<div class="operat">'+
+											'<span data-id="'+ res.data.list[i].id +'">删除</span>'+
+										'</div>'+
+									'</div>';
+								}
+								$('.list').html(html);
+							}
+						}
+					}
+				});	
+			}
+			
 			function events() {
 
-				$('.toCenter').click(function() {
-					location.href = 'center.html';
+				$('.list').on('click','.operat span',function(){
+					$.ajax({
+						type:"post",
+						url:"http://shanxing100.fupin.org.cn/api/signin/del",
+						async:true,
+						data:{
+							id: $(this).data('id')
+						},
+						dataType: 'jsonp',
+						success: function(res){
+	//						console.log(res)
+							if(res.code ==0){
+								globalMes(res.msg,function(){
+									getmyactivity();
+								})
+							}else{
+								globalMes(res.msg)
+							}
+						}
+					});	
 				})
+			}
+			
+			function globalMes(txt,callback) {
+				$('body').append('<div class="globalmes">' + txt + '</div>')
+				setTimeout(function() {
+					$('.globalmes').remove();
+					if(callback){
+						callback();
+					}
+				}, 2000)
 			}
 		})
 	</script>
