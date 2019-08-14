@@ -29,7 +29,7 @@
 				<input type="text" name="" id="" value="" placeholder="查询"/>
 			</div>
 			<div class="list">
-				<div class="item">
+				<!--<div class="item">
 					<h5>猪配齐</h5>
 					<p>募捐金额:&nbsp&nbsp<i>10000元</i>&nbsp&nbsp&nbsp&nbsp订单编号:&nbsp&nbsp1000000</p>
 					<div class="operat">
@@ -37,16 +37,7 @@
 						<span>修改</span>
 						<span>删除</span>
 					</div>
-				</div>
-				<div class="item">
-					<h5>猪配齐</h5>
-					<p>募捐金额:&nbsp&nbsp<i>10000元</i>&nbsp&nbsp&nbsp&nbsp订单编号:&nbsp&nbsp1000000</p>
-					<div class="operat">
-						<span>确认</span>
-						<span>修改</span>
-						<span>删除</span>
-					</div>
-				</div>
+				</div>-->
 			</div>
 		</div>
 		
@@ -58,14 +49,103 @@
 			Init();
 
 			function Init() {
+				getactivityscorelist();
 				events();
 			}
-
+			
+			function getactivityscorelist(){
+				$.ajax({
+					type:"post",
+					url:"http://shanxing100.fupin.org.cn/api/score/getactivityscorelist",
+					async:true,
+					data:{
+						activityid: getQueryString('id')
+					},
+					dataType: 'jsonp',
+					success: function(res){
+						console.log(res)
+						if(res.code ==0){
+							if(res.data.list.length == 0){
+								$('.list').html('');
+							}else{
+								var html = '';
+								for(var i =0;i<res.data.list.length;i++){
+									html += '<div class="item" data-id="'+ res.data.list[i].id +'">'+
+												'<h5>'+ res.data.list[i].donor_name +'</h5>'+
+												'<p>募捐金额:&nbsp&nbsp<i>'+ res.data.list[i].order_money +'元</i>&nbsp&nbsp&nbsp&nbsp订单编号:&nbsp&nbsp'+ res.data.list[i].orderno +'</p>'+	
+												'<div class="operat">'+
+													'<span class="confirm">确认</span>'+
+													'<span class="fixed"><a href=scorein.html?scoreid='+res.data.list[i].id+'>修改</a></span>'+
+													'<span class="delete">删除</span>'+
+												'</div>'+
+											'</div>';
+								}
+								$('.list').html(html);
+							}
+						}
+					}
+				});	
+			}
+			
 			function events() {
 
-				$('.toCenter').click(function() {
-					location.href = 'center.html';
+				$('.list').on('click','.confirm',function(){
+					$.ajax({
+						type:"post",
+						url:"http://shanxing100.fupin.org.cn/api/score/reviewpass",
+						async:true,
+						data:{
+							id: $(this).parents('.item').data('id')
+						},
+						dataType: 'jsonp',
+						success: function(res){
+//							console.log(res)
+							if(res.code ==0){
+								globalMes(res.msg)
+								getactivityscorelist();
+							}else{
+								globalMes(res.msg)
+							}
+						}
+					});
 				})
+				
+				$('.list').on('click','.delete',function(){
+					$.ajax({
+						type:"post",
+						url:"http://shanxing100.fupin.org.cn/api/score/del",
+						async:true,
+						data:{
+							id: $(this).parents('.item').data('id')
+						},
+						dataType: 'jsonp',
+						success: function(res){
+//							console.log(res)
+							if(res.code ==0){
+								globalMes(res.msg)
+								getactivityscorelist();
+							}else{
+								globalMes(res.msg)
+							}
+						}
+					});
+				})
+			}
+			
+			function getQueryString(name){
+			     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+			     var r = window.location.search.substr(1).match(reg);
+			     if(r!=null)return  unescape(r[2]); return null;
+			}
+			
+			function globalMes(txt,callback) {
+				$('body').append('<div class="globalmes">' + txt + '</div>')
+				setTimeout(function() {
+					$('.globalmes').remove();
+					if(callback){
+						callback();
+					}
+				}, 2000)
 			}
 		})
 	</script>

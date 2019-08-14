@@ -32,7 +32,7 @@
         margin-top: 0.6rem;
         .item{
             position: relative;
-            height: 9.4rem;
+            height: 7.4rem;
             box-shadow: 0 0 0.5rem #ddd;
             border-radius: 0.54rem;
             margin-bottom: 0.6rem;
@@ -77,6 +77,7 @@
                 }
             }
             .operat{
+                display: none;
                 position: absolute;
                 bottom: 0;
                 width: 100%;
@@ -108,7 +109,14 @@
                 }
             }
         }
+        .item.open{
+            height: 9.4rem;
+            .operat{
+                display: block;
+            }
+        }
     }
+    
     .loadMore{
         display: none;
         text-align: center;

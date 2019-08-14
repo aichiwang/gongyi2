@@ -23,7 +23,7 @@
 				<h5>签到活动列表</h5>
 			</div>
 			<div class="list">
-				<div class="item">
+				<!--<div class="item">
 					<h5>
 						<i>001</i>
 						<span>活动编号: <i>89089907</i></span>
@@ -52,37 +52,7 @@
 						<span><a href="scorein.html">成绩补录</a></span>
 					</div>
 					<span class="admin">管理 <img src="res/img/static/arrowDown.png"/></span>
-				</div>
-				<div class="item">
-					<h5>
-						<i>001</i>
-						<span>活动编号: <i>89089907</i></span>
-					</h5>
-					<div class="til">善行100真的记号</div>
-					<p>起止时间:2019-07-22  10:00:55</p>
-					<p>活动地点:北京市海淀区中关村北一街</p>
-					<div class="dataDetail">
-						<div class="dataItem">
-							<p>86时</p>
-							<span>服务时长</span>
-						</div>
-						<div class="dataItem">
-							<p>1000元</p>
-							<span>筹款金额</span>
-						</div>
-						<div class="dataItem">
-							<p>60人</p>
-							<span>小组人数</span>
-						</div>
-					</div>
-					<div class="operat">
-						<span><a href="signinadmin.html">签到管理</a></span>
-						<span><a href="signoutadmin.html">签退管理</a></span>
-						<span><a href="scoresh.html">成绩审核</a></span>
-						<span><a href="scorein.html">成绩补录</a></span>
-					</div>
-					<span class="admin">管理 <img src="res/img/static/arrowDown.png"/></span>
-				</div>
+				</div>-->
 			</div>
 			<div class="loadMore">
 				<p>点击继续加载</p>
@@ -98,13 +68,72 @@
 			Init();
 
 			function Init() {
+				getactivitys();
 				events();
+			}
+			
+			function getactivitys(){
+				$.ajax({
+					type:"post",
+					url:"http://shanxing100.fupin.org.cn/api/activity/getactivitys",
+					async:true,
+					dataType: 'jsonp',
+					success: function(res){
+						console.log(res)
+						if(res.code ==0){
+							if(res.data.activities.length == 0){
+								$('.list').html('');
+							}else{
+								var html = '';
+								for(var i =0;i<res.data.activities.length;i++){
+									html += '<div class="item">'+
+										'<h5>'+
+											'<i>'+ res.data.activities[i].id  +'</i>'+
+											'<span>活动编号: <i>'+ res.data.activities[i].id +'</i></span>'+
+										'</h5>'+
+										'<div class="til">'+ res.data.activities[i].name +'</div>'+
+										'<p>起止时间:'+ res.data.activities[i].ctime +'</p>'+
+										'<p>活动地点:'+ res.data.activities[i].address +'</p>'+
+										'<div class="dataDetail">'+
+											'<div class="dataItem">'+
+												'<p>'+ (res.data.activities[i].duration||0) +'时</p>'+
+												'<span>服务时长</span>'+
+											'</div>'+
+											'<div class="dataItem">'+
+												'<p>'+ (res.data.activities[i].money||0) +'元</p>'+
+												'<span>筹款金额</span>'+
+											'</div>'+
+											'<div class="dataItem">'+
+												'<p>'+ (res.data.activities[i].member_count||0) +'人</p>'+
+												'<span>小组人数</span>'+
+											'</div>'+
+										'</div>'+
+										'<div class="operat">'+
+											'<span><a href="signinadmin.html?id='+ res.data.activities[i].id  +'">签到管理</a></span>'+
+											'<span><a href="signoutadmin.html?id='+ res.data.activities[i].id  +'">签退管理</a></span>'+
+											'<span><a href="scoresh.html?id='+ res.data.activities[i].id  +'">成绩审核</a></span>'+
+											'<span><a href="scorein.html?id='+ res.data.activities[i].id  +'">成绩补录</a></span>'+
+										'</div>'+
+										'<span class="admin">管理 <img src="res/img/static/arrowDown.png"/></span>'+
+									'</div>';
+								}
+								$('.list').html(html);
+							}
+						}
+					}
+				});	
 			}
 
 			function events() {
 
-				$('.toCenter').click(function() {
-					location.href = 'center.html';
+				$('.list').on('click','.admin',function(){
+					if($(this).parent().hasClass('open')){
+						$(this).parent().removeClass('open')
+						$(this).find('img').attr('src','res/img/static/arrowDown.png')
+					}else{
+						$(this).parent().addClass('open')
+						$(this).find('img').attr('src','res/img/static/arrowUp.png')
+					}
 				})
 			}
 		})

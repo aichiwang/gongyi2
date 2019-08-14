@@ -138,6 +138,44 @@
 						}
 					});	
 				})
+				
+				$('.search img').click(function(){
+					var val = $(this).siblings('input').val();
+					if(!val){
+						globalMes('活动名称不能为空')
+					}else{
+						$.ajax({
+							type:"get",
+							url:"http://shanxing100.fupin.org.cn/api/useractivity/getmyactivity",
+							async:true,
+							data:{
+								name: val
+							},
+							dataType: 'jsonp',
+							success: function(res){
+								console.log(res)
+								if(res.code ==0){
+									if(res.data.list.length == 0){
+										$('.list').html('');
+									}else{
+										var html = '';
+										for(var i =0;i<res.data.list.length;i++){
+											html += '<div class="item">'+
+												'<h5>'+ res.data.list[i].name +'</h5>'+
+												'<p>时间:&nbsp&nbsp<i>'+ res.data.list[i].ctime +'</i></p>'+
+												'<p>地点:&nbsp&nbsp'+ res.data.list[i].address +'</p>'+
+												'<div class="operat">'+
+													'<span data-id="'+ res.data.list[i].id +'">删除</span>'+
+												'</div>'+
+											'</div>';
+										}
+										$('.list').html(html);
+									}
+								}
+							}
+						});	
+					}
+				})
 			}
 			
 			function globalMes(txt,callback) {

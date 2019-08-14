@@ -55,7 +55,7 @@
 					<img src="res/img/static/centerIcon3.png"/>
 					<span>学习中心</span>
 				</a>
-				<a href="scorein.html">
+				<a id="signInOut">
 					<img src="res/img/static/centerIcon4.png"/>
 					<span>签到签退</span>
 				</a>
@@ -82,19 +82,19 @@
 			<div class="cover"></div>
 			<div class="content">
 				<h5>活动签到</h5>
-				<input type="text" placeholder="请输入签到活动码"/>
+				<input type="text" placeholder="请输入签到活动码" id="signInVal"/>
 				<input type="text" placeholder="获取签到活动名称"/>
 				<input type="text" placeholder="获取位置信息"/>
-				<div class="signIn">打卡签到</div>
+				<div class="signIn" id="signInBtn">打卡签到</div>
 			</div>
 		</div>
 		<div class="alert" style="display: none;">
 			<div class="cover"></div>
 			<div class="content short">
 				<h5>活动签退</h5>
-				<input type="text" placeholder="活动编码"/>
+				<input type="text" placeholder="活动编码" id="signOutVal"/>
 				<input type="text" placeholder="活动名称"/>
-				<div class="signIn">打卡签退</div>
+				<div class="signIn" id="signOutBtn">打卡签退</div>
 			</div>
 		</div>
 
@@ -127,6 +127,18 @@
 						$('.userData .right p').html(res.data.money)
 						$('.userInfo p').html(res.data.username)
 						$('.userInfo p').html(res.data.username)
+//						res.data.has_signined = 1
+						if( res.data.has_signined ==1 ){
+							$('#signInOut').unbind('click').on('click',function(){
+								$('.alert').eq(1).show();
+								$('.alert').eq(0).hide();
+							})
+						}else{
+							$('#signInOut').unbind('click').on('click',function(){
+								$('.alert').eq(0).show();
+								$('.alert').eq(1).hide();
+							})
+						}
 					}
 				});
 			}
@@ -138,7 +150,62 @@
 				$('.admin').click(function() {
 					location.href = 'teamadmin.html';
 				})
+				$('#signInBtn').click(function(){
+					var val = $('#signInVal').val();
+					if(!val){
+						globalMes('活动编码不能为空')
+						return
+					}
+					$.ajax({
+						type:"post",
+						url:"http://shanxing100.fupin.org.cn/api/useractivity/signin",
+						data: {
+							activityid: val
+						},
+						async:true,
+						dataType: 'jsonp',
+						success: function(res){
+							globalMes( res.msg ,function(){
+								$('.alert').hide();
+							})
+							
+						}
+					});
+				})
+				
+				$('#signOutBtn').click(function(){
+					var val = $('#signOutVal').val();
+					if(!val){
+						globalMes('活动编码不能为空')
+						return
+					}
+					$.ajax({
+						type:"post",
+						url:"http://shanxing100.fupin.org.cn/api/useractivity/signout",
+						data: {
+							code: val
+						},
+						async:true,
+						dataType: 'jsonp',
+						success: function(res){
+							globalMes( res.msg ,function(){
+								$('.alert').hide();
+							})
+						}
+					});
+				})
 			}
+			
+			function globalMes(txt,callback) {
+				$('body').append('<div class="globalmes">' + txt + '</div>')
+				setTimeout(function() {
+					$('.globalmes').remove();
+					if(callback){
+						callback();
+					}
+				}, 2000)
+			}
+			
 		})
 	</script>
 
