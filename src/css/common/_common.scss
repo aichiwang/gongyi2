@@ -265,17 +265,18 @@ input[type=date]{
 #province_selector,
 #city_selector,
 #district_selector{
-    width: 2rem;
+    width: 3rem;
     position: absolute;
 }
 
 #province_selector{
-    right: 4.5rem;
+    right: 3.5rem;
 }
 #city_selector{
-    right: 2.5rem;
+    right: 0.5rem;
 }
 #district_selector{
+    display: none;
     right: 0.5rem;
 }
 
@@ -294,4 +295,11 @@ input[type=date]{
 
 form{
     display: inline;
+}
+
+.emptyWrap{
+    text-align: center;
+    img{
+        width: 7rem;
+    }
 }

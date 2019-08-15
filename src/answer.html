@@ -30,30 +30,21 @@
 			<div class="toCreate">提交</div>-->
 		</div>
 
-		<div class="alert clock">
-			<div class="cover"></div>
-			<div class="content">
-				<p class="tips1">开始报名前，请先完成答题考验！</p>
-				<div class="timer"></div>
-			</div>
-		</div>
 		<div class="alert retry">
 			<div class="cover"></div>
 			<div class="content2">
-				<p class="tips1">答题成绩</p>
-				<p class="tips2"><i>80</i>分</p>
-				<p class="tips3">请仔细阅读活动介绍</p>
-				<div class="searchAns">寻找答案</div>
-				<p class="retryBtn">再答一次</p>
+				<p class="tips1">考试未通过</p>
+				<!--<p class="tips2"><i>80</i>分</p>-->
+				<p class="tips3">请参加补考!</p>
+				<p class="retryBtn">再次考试</p>
 			</div>
 		</div>
 		<div class="alert succ">
 			<div class="cover"></div>
 			<div class="content3">
-				<p class="tips1">答题成绩</p>
-				<p class="tips2"><i>100</i>分</p>
-				<p class="tips3">恭喜你获得报名资格！</p>
-				<div class="toBm">进入报名</div>
+				<p class="tips1">考试通过</p>
+				<p class="tips2"></p>
+				<div class="toBm">个人中心</div>
 			</div>
 		</div>
 
@@ -67,16 +58,6 @@
 			function Init() {
 				getExamState();
 				getQuestions();
-				var indexClock = 5;
-				var timerDom = $('.timer');
-				var timer = setInterval(function() {
-					if(indexClock <= 0) {
-						clearInterval(timer)
-						$('.clock').hide();
-						return
-					}
-					timerDom.html(indexClock--)
-				}, 1000)
 				events();
 			}
 			
@@ -124,7 +105,7 @@
 			
 			function events() {
 				$('.toBm').click(function() {
-					location.href = 'myteam.html'
+					location.href = 'center.html'
 				})
 				$('.searchAns').click(function() {
 					location.href = 'introduce.html'
@@ -163,10 +144,11 @@
 									$('.retry').show();
 								}
 							}
-							globalMes( res.msg)
+//							globalMes( res.msg)
 						}
 					});
 				})
+				
 			}
 			
 			function globalMes(txt,callback) {

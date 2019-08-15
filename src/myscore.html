@@ -86,7 +86,7 @@
 						console.log(res)
 						if(res.code == 0){
 							if(res.data.list.length == 0){
-								$('.list').html('<div style="text-align: center;">空<div>');
+								$('.list').html('<div class="emptyWrap"><img src="res/img/static/empty.png"></div>');
 							}else{
 								var html = "";
 								for(var i =0;i<res.data.list.length;i++){

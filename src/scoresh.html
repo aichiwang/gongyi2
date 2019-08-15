@@ -66,7 +66,7 @@
 						console.log(res)
 						if(res.code ==0){
 							if(res.data.list.length == 0){
-								$('.list').html('');
+								$('.list').html('<div class="emptyWrap"><img src="res/img/static/empty.png"></div>');
 							}else{
 								var html = '';
 								for(var i =0;i<res.data.list.length;i++){
@@ -82,6 +82,9 @@
 								}
 								$('.list').html(html);
 							}
+						}else{
+							$('.list').html('<div class="emptyWrap"><img src="res/img/static/empty.png"></div>');
+							globalMes(res.msg)
 						}
 					}
 				});	

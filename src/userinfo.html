@@ -23,13 +23,13 @@
 				<span>请选择地址</span>
 				<select id="province_selector" class="bd-filter__select"></select>
 				<select id="city_selector" class="bd-filter__select"></select>
-				<select id="district_selector" class="bd-filter__select"></select>
+				<select id="district_selector" class="bd-filter__select" style="display: none;"></select>
 			</div>
 			<input type="text" name="" id="school" value="" placeholder="请选择高校"/>
 			<input type="text" name="" id="department" value="" placeholder="请输入院系"/>
 			<div class="date">
-				请选择年份
-				<input type="date" name="" id="year" value="" placeholder="请选择年份"/>
+				请输入年份
+				<input type="year" name="" id="year" value="" placeholder="请输入入学年份"/>
 			</div>
 			<input type="text" name="" id="major" value="" placeholder="请输入专业"/>
 			<input type="text" name="" id="username" value="" placeholder="请输入中文姓名"/>
@@ -66,12 +66,14 @@
 						$('#school').val(res.data.school);
 						$('#department').val(res.data.department);
 						$('#major').val(res.data.major);
-						$('#chineseName').val(res.data.username);
-						$('#englishName').val(res.data.english_name);
+						$('#username').val(res.data.username);
+						$('#english_name').val(res.data.english_name);
+						$('#year').val(res.data.enroll_year);
 						$('#email').val(res.data.email);
 						if(res.data.province &&($('#province_selector [value=' + res.data.province + ']')[0])){
 							$('#province_selector [value=' + res.data.province + ']')[0].selected = true;
 						}
+						$('#province_selector').trigger('change')
 						if(res.data.city&&($('#city_selector [value=' + res.data.city + ']')[0])){
 							$('#city_selector [value=' + res.data.city + ']')[0].selected = true;
 						}
