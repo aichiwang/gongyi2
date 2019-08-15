@@ -32,8 +32,8 @@
 				<input type="date" name="" id="year" value="" placeholder="请选择年份"/>
 			</div>
 			<input type="text" name="" id="major" value="" placeholder="请输入专业"/>
-			<input type="text" name="" id="chineseName" value="" placeholder="请输入中文姓名"/>
-			<input type="text" name="" id="englishName" value="" placeholder="请输入英文姓名"/>
+			<input type="text" name="" id="username" value="" placeholder="请输入中文姓名"/>
+			<input type="text" name="" id="english_name" value="" placeholder="请输入英文姓名"/>
 			<input type="text" name="" id="email" value="" placeholder="请输入邮箱"/>
 			<div class="subBtn">提交</div>
 		</div>
@@ -69,9 +69,12 @@
 						$('#chineseName').val(res.data.username);
 						$('#englishName').val(res.data.english_name);
 						$('#email').val(res.data.email);
-//						$('#province_selector [value=' + res.data.province + ']')[0].selected = true;
-//						$('#city_selector [value=' + res.data.city + ']')[0].selected = true;
-//						$('#district_selector [value=' + res.data.province + ']')[0].selected = true;
+						if(res.data.province &&($('#province_selector [value=' + res.data.province + ']')[0])){
+							$('#province_selector [value=' + res.data.province + ']')[0].selected = true;
+						}
+						if(res.data.city&&($('#city_selector [value=' + res.data.city + ']')[0])){
+							$('#city_selector [value=' + res.data.city + ']')[0].selected = true;
+						}
 					}
 				});
 			}
@@ -84,41 +87,70 @@
 					var city = $('#city_selector').val();
 					var school = $('#school').val();
 					var department = $('#department').val();
-					var enroll_year = $('#phoneNum').val();
-					var major = $('#phoneNum').val();
-					var username = $('#phoneNum').val();
-					var english_name = $('#phoneNum').val();
-					var email = $('#passWord').val();
-					var id_type = $('#passWord').val();
-					var id_no = $('#passWord').val();
+					var enroll_year = $('#year').val().slice(0,4);
+					var major = $('#major').val();
+					var username = $('#username').val();
+					var english_name = $('#english_name').val();
+					var email = $('#email').val();
 					
-					if(!phoneNum){
-						globalMes('请输入手机号')
-					}else if(!passWord){
-						globalMes('请输入密码')
+					if(province == '省'){
+						globalMes('请选择省')
+					}else if(city == '市'){
+						globalMes('请选择市')
+					}else if(!school){
+						globalMes('请输入高校名称')
+					}else if(!department){
+						globalMes('请输入院系')
+					}else if(!enroll_year){
+						globalMes('请选择入学年份')
+					}else if(!major){
+						globalMes('请输入专业')
+					}else if(!username){
+						globalMes('请输入中文名')
+					}else if(!english_name){
+						globalMes('请输入英文名')
+					}else if(!email){
+						globalMes('请输入邮箱')
 					}else{
 						$.ajax({
 							type:"post",
-							url:"http://shanxing100.fupin.org.cn/api/user/updatepassword",
+							url:"http://shanxing100.fupin.org.cn/api/user/update",
 							async:true,
 							dataType:'jsonp',
 							data:{
-								old_password: passWord,
-								new_password: phoneNum,
-								renew_password: phoneNum,
+								province: province,
+								city: city,
+								school: school,
+								department: department,
+								enroll_year: enroll_year,
+								major: major,
+								username: username,
+								english_name: english_name,
+								email: email,
 							},
 							success: function(res){
 								console.log(res)
+								globalMes(res.msg)
 								if(res.code == 0){
-									globalMes('登陆成功!',function(){
-										location.href = 'center.html'
-									})
+//									globalMes('登陆成功!',function(){
+//										location.href = 'center.html'
+//									})
 								}
 							}
 						});
 					}
 					
 				})
+			}
+			
+			function globalMes(txt,callback) {
+				$('body').append('<div class="globalmes">' + txt + '</div>')
+				setTimeout(function() {
+					$('.globalmes').remove();
+					if(callback){
+						callback();
+					}
+				}, 2000)
 			}
 		})
 	</script>
