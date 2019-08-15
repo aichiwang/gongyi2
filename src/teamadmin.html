@@ -82,7 +82,7 @@
 						console.log(res)
 						if(res.code ==0){
 							if(res.data.activities.length == 0){
-								$('.list').html('');
+								$('.list').html('暂无数据');
 							}else{
 								var html = '';
 								for(var i =0;i<res.data.activities.length;i++){

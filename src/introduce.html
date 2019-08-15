@@ -20,8 +20,8 @@
 	<body>
 		<div class="wrap">
 			<div class="top">
-				<img src="../dist/res/img/static/default.jpg"/>
-				<span>善行萌新</span>
+				<!--<img src="../dist/res/img/static/default.jpg"/>
+				<span>善行萌新</span>-->
 			</div>
 			<div class="content">
 				<div class="tab">
@@ -91,7 +91,7 @@
 							$('.top span').html('未登录')
 						}else if(res.code ==0){
 							$('.top span').html(res.data.username||'善行萌新')
-							$('.top img').attr('src',res.data.avatar||'res/img/static/default.jpg')
+							$('.top img').attr('src',res.data.avatar||'res/img/static/default2.jpg')
 						}else{
 							globalMes(res.msg)
 						}

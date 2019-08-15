@@ -65,6 +65,7 @@
 			Init();
 
 			function Init() {
+				getExamState();
 				getQuestions();
 				var indexClock = 5;
 				var timerDom = $('.timer');
@@ -77,6 +78,21 @@
 					timerDom.html(indexClock--)
 				}, 1000)
 				events();
+			}
+			
+			function getExamState(){
+				$.ajax({
+					type:"post",
+					url:"http://shanxing100.fupin.org.cn/api/exam/ispassed",
+					async:true,
+					dataType: 'jsonp',
+					success: function(res){
+//						console.log(res)
+						if(res.data.is_passed == 1){	//通过
+							$('.succ').show();
+						}
+					}
+				});
 			}
 			
 			function getQuestions(){
@@ -140,6 +156,12 @@
 							console.log(res)
 							if(res.code == 0){
 								//globalMes( res.msg)
+								if(res.data.passed == 1){
+									$('.succ').show();
+								}else if(res.data.passed == 0){
+									$('.retry .tips2 i').html(parseInt(res.data.right/res.data.total*100))
+									$('.retry').show();
+								}
 							}
 							globalMes( res.msg)
 						}

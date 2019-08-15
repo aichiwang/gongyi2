@@ -21,7 +21,7 @@
 		<div class="wrap">
 			<div class="userInfo">
 				<div class="uImg">
-					<img src="res/img/static/default.jpg"/>
+					<img src="res/img/static/default2.jpg"/>
 				</div>
 				<p>0</p>
 			</div>
@@ -40,7 +40,7 @@
 			</div>
 			<div class="links">
 				<a href="introduce.html">
-					<img src="res/img/static/centerIcon6.png"/>
+					<img src="res/img/static/indexIcon1.jpg"/>
 					<span>项目介绍</span>
 				</a>
 				<a href="question.html">
@@ -64,7 +64,7 @@
 					<span>成绩录入</span>
 				</a>
 				<a href="rank.html">
-					<img src="res/img/static/centerIcon6.png"/>
+					<img src="res/img/static/indexIcon3.jpg"/>
 					<span>成绩排行</span>
 				</a>
 				<a href="myscore.html">
@@ -121,12 +121,10 @@
 					dataType: 'jsonp',
 					success: function(res){
 						console.log(res)
-						$('.uImg img').attr('src',res.data.avatar||'res/img/static/default.jpg')
+						$('.uImg img').attr('src',res.data.avatar||'res/img/static/default2.jpg')
 						$('.userInfo p').html(res.data.username||'善行萌新')
 						$('.userData .left p').html(res.data.duration)
 						$('.userData .right p').html(res.data.money)
-						$('.userInfo p').html(res.data.username)
-						$('.userInfo p').html(res.data.username)
 //						res.data.has_signined = 1
 						if( res.data.has_signined ==1 ){
 							$('#signInOut').unbind('click').on('click',function(){

@@ -55,7 +55,9 @@ label, button {
 fieldset, img {
   border: 0;
 }
-
+input {
+    -webkit-appearance: none; 
+}
 .posr {
   position: relative;
 }
