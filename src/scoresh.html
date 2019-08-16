@@ -70,6 +70,7 @@
 							}else{
 								var html = '';
 								for(var i =0;i<res.data.list.length;i++){
+									if(res.data.list[i].status == 0){
 									html += '<div class="item" data-id="'+ res.data.list[i].id +'">'+
 												'<h5>'+ res.data.list[i].donor_name +'</h5>'+
 												'<p>募捐金额:&nbsp&nbsp<i>'+ res.data.list[i].order_money +'元</i>&nbsp&nbsp&nbsp&nbsp订单编号:&nbsp&nbsp'+ res.data.list[i].orderno +'</p>'+	
@@ -79,6 +80,7 @@
 													'<span class="delete">删除</span>'+
 												'</div>'+
 											'</div>';
+									}
 								}
 								$('.list').html(html);
 							}
