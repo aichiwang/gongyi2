@@ -25,11 +25,48 @@
 				<select id="city_selector" class="bd-filter__select" style="display: none;"></select>
 				<select id="district_selector" class="bd-filter__select" style="display: none;"></select>
 			</div>
-			<input type="text" name="" id="school" value="" placeholder="请选择高校"/>
+			<div class="area school">
+				<span>请选择高校</span>
+				<select id="school">
+					<option value="">学校</option>
+				</select>
+			</div>
 			<input type="text" name="" id="department" value="" placeholder="请输入院系"/>
-			<div class="date">
-				请输入年份
-				<input type="year" name="" id="year" value="" placeholder="请输入入学年份"/>
+			<div class="area school">
+				<span>请选择入学年份</span>
+				<select id="year">
+					<option value="1990">1990</option>
+					<option value="1991">1991</option>
+					<option value="1992">1992</option>
+					<option value="1993">1993</option>
+					<option value="1994">1994</option>
+					<option value="1995">1995</option>
+					<option value="1996">1996</option>
+					<option value="1997">1997</option>
+					<option value="1998">1998</option>
+					<option value="1999">1999</option>
+					<option value="2000">2000</option>
+					<option value="2001">2001</option>
+					<option value="2002">2002</option>
+					<option value="2003">2003</option>
+					<option value="2004">2004</option>
+					<option value="2005">2005</option>
+					<option value="2006">2006</option>
+					<option value="2007">2007</option>
+					<option value="2008">2008</option>
+					<option value="2009">2009</option>
+					<option value="2010">2010</option>
+					<option value="2011">2011</option>
+					<option value="2012">2012</option>
+					<option value="2013">2013</option>
+					<option value="2014">2014</option>
+					<option value="2015">2015</option>
+					<option value="2016">2016</option>
+					<option value="2017">2017</option>
+					<option value="2018">2018</option>
+					<option value="2019">2019</option>
+					<option value="2020">2020</option>
+				</select>
 			</div>
 			<input type="text" name="" id="major" value="" placeholder="请输入专业"/>
 			<input type="text" name="" id="username" value="" placeholder="请输入中文姓名"/>
@@ -48,7 +85,7 @@
 
 			function Init() {
 				addressInit('province_selector', 'city_selector', 'district_selector');
-				initInfo();
+				getSchool();
 				events();
 			}
 			
@@ -68,19 +105,38 @@
 						$('#major').val(res.data.major);
 						$('#username').val(res.data.username);
 						$('#english_name').val(res.data.english_name);
-						$('#year').val(res.data.enroll_year);
 						$('#email').val(res.data.email);
 						if(res.data.province &&($('#province_selector [value=' + res.data.province + ']')[0])){
 							$('#province_selector [value=' + res.data.province + ']')[0].selected = true;
 						}
 						$('#province_selector').trigger('change')
-						if(res.data.city&&($('#city_selector [value=' + res.data.city + ']')[0])){
-							$('#city_selector [value=' + res.data.city + ']')[0].selected = true;
+						if(res.data.school&&($('#school [value=' + res.data.school + ']')[0])){
+							$('#school [value=' + res.data.school + ']')[0].selected = true;
+						}
+						if(res.data.enroll_year&&($('#year [value=' + res.data.enroll_year + ']')[0])){
+							$('#year [value=' + res.data.enroll_year + ']')[0].selected = true;
 						}
 					}
 				});
 			}
 			
+			function getSchool(){
+				$.ajax({
+					type:"post",
+					url:"http://shanxing100.fupin.org.cn/api/tools/getschools",
+					async:true,
+					dataType: 'jsonp',
+					success: function(res){
+//						console.log(res)
+						if(res.code == 0){
+							window.schoolList = res.data.school_list
+							initInfo();
+						}else{
+							globalMes(res.msg)
+						}
+					}
+				});
+			}
 
 			function events() {
 				
@@ -89,7 +145,7 @@
 					var city = $('#city_selector').val();
 					var school = $('#school').val();
 					var department = $('#department').val();
-					var enroll_year = $('#year').val().slice(0,4);
+					var enroll_year = $('#year').val();
 					var major = $('#major').val();
 					var username = $('#username').val();
 					var english_name = $('#english_name').val();
@@ -142,6 +198,20 @@
 						});
 					}
 					
+				})
+				
+				$('#province_selector').change(function(){
+					if($(this).val() == '省'){
+						$('#school').html('<option>学校</option>')
+					}
+					var schools = window.schoolList[$(this).val()]||window.schoolList[$(this).val()+'省']||window.schoolList[$(this).val()+'市'];
+					if(schools){
+						var html = '';
+						for(var i =0;i<schools.length;i++){
+							html += '<option value="'+ schools[i] +'">'+ schools[i] +'</option>'
+						}
+						$('#school').html(html);
+					}
 				})
 			}
 			

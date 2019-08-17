@@ -122,25 +122,32 @@
 					dataType: 'jsonp',
 					success: function(res){
 						console.log(res)
-						$('.uImg img').attr('src',res.data.avatar||'res/img/static/default2.jpg')
-						$('.userInfo p').html(res.data.username||'善行萌新')
-						$('.userData .left p').html(res.data.duration)
-						$('.userData .right p').html(res.data.money)
-						if(res.data.isZoneLeader == 1){
-							$('.admin').css('display','inline-block');
-						}
-//						res.data.has_signined = 1
-						if( res.data.has_signined ==1 ){
-							$('#signInOut').unbind('click').on('click',function(){
-								$('.alert').eq(1).show();
-								$('.alert').eq(0).hide();
+						if(res.code == 0){
+							$('.uImg img').attr('src',res.data.avatar||'res/img/static/default2.jpg')
+							$('.userInfo p').html(res.data.username||'善行萌新')
+							$('.userData .left p').html(res.data.duration)
+							$('.userData .right p').html(res.data.money)
+							if(res.data.isZoneLeader == 1){
+								$('.admin').css('display','inline-block');
+							}
+							if( res.data.has_signined ==1 ){
+								$('#signInOut').unbind('click').on('click',function(){
+									$('.alert').eq(1).show();
+									$('.alert').eq(0).hide();
+								})
+							}else{
+								$('#signInOut').unbind('click').on('click',function(){
+									$('.alert').eq(0).show();
+									$('.alert').eq(1).hide();
+								})
+							}
+						}else if(res.code == 6){
+							$('.userInfo p').html('未登录')
+							$('.logout').html('登录').unbind('click').click(function(){
+								location.href = 'login.html'
 							})
-						}else{
-							$('#signInOut').unbind('click').on('click',function(){
-								$('.alert').eq(0).show();
-								$('.alert').eq(1).hide();
-							})
 						}
+						
 					}
 				});
 			}
@@ -218,6 +225,7 @@
 						}
 					});
 				})
+				
 			}
 			
 			function globalMes(txt,callback) {
