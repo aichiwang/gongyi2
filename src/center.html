@@ -81,11 +81,10 @@
 		
 		<div class="alert" style="display: none;">
 			<div class="cover"></div>
-			<div class="content">
+			<div class="content short">
 				<h5>活动签到</h5>
 				<input type="text" placeholder="请输入签到活动码" id="signInVal"/>
-				<input type="text" placeholder="获取签到活动名称"/>
-				<input type="text" placeholder="获取位置信息"/>
+				<input type="text" placeholder="获取签到活动名称" id="actNameSigin"/>
 				<div class="signIn" id="signInBtn">打卡签到</div>
 			</div>
 		</div>
@@ -94,7 +93,7 @@
 			<div class="content short">
 				<h5>活动签退</h5>
 				<input type="text" placeholder="活动编码" id="signOutVal"/>
-				<input type="text" placeholder="活动名称"/>
+				<input type="text" placeholder="活动名称" id="actNameSigout"/>
 				<div class="signIn" id="signOutBtn">打卡签退</div>
 			</div>
 		</div>
@@ -219,6 +218,52 @@
 								globalMes( res.msg ,function(){
 									location.href = "index.html"
 								})
+							}else{
+								globalMes( res.msg )
+							}
+						}
+					});
+				})
+				
+				$('#signInVal').blur(function(){
+					$.ajax({
+						type:"post",
+						url:"http://shanxing100.fupin.org.cn/api/activity/getactivitybycode",
+						async:true,
+						data:{
+							signin_code: $(this).val()
+						},
+						dataType: 'jsonp',
+						success: function(res){
+							if(res.code == 0){
+								if(res.data.activity){
+									$('#actNameSigin').val(res.data.activity.name)
+								}else{
+									globalMes( '活动码填写有误' )
+								}
+							}else{
+								globalMes( res.msg )
+							}
+						}
+					});
+				})
+				
+				$('#signOutVal').blur(function(){
+					$.ajax({
+						type:"post",
+						url:"http://shanxing100.fupin.org.cn/api/activity/getactivitybycode",
+						async:true,
+						data:{
+							signin_code: $(this).val()
+						},
+						dataType: 'jsonp',
+						success: function(res){
+							if(res.code == 0){
+								if(res.data.activity){
+									$('#actNameSigout').val(res.data.activity.name)
+								}else{
+									globalMes( '活动码填写有误' )
+								}
 							}else{
 								globalMes( res.msg )
 							}
