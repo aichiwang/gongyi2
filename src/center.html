@@ -122,6 +122,9 @@
 					success: function(res){
 						console.log(res)
 						if(res.code == 0){
+							if(!res.data.username){
+								location.href = 'userinfo.html'
+							}
 							$('.uImg img').attr('src',res.data.avatar||'res/img/static/default2.jpg')
 							$('.userInfo p').html(res.data.username||'善行萌新')
 							$('.userData .left p').html(res.data.duration)
@@ -239,10 +242,10 @@
 								if(res.data.activity){
 									$('#actNameSigin').val(res.data.activity.name)
 								}else{
-									globalMes( '活动码填写有误' )
+//									globalMes( '活动码填写有误' )
 								}
 							}else{
-								globalMes( res.msg )
+//								globalMes( res.msg )
 							}
 						}
 					});
@@ -262,10 +265,10 @@
 								if(res.data.activity){
 									$('#actNameSigout').val(res.data.activity.name)
 								}else{
-									globalMes( '活动码填写有误' )
+//									globalMes( '活动码填写有误' )
 								}
 							}else{
-								globalMes( res.msg )
+//								globalMes( res.msg )
 							}
 						}
 					});

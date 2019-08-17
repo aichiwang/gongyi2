@@ -20,18 +20,18 @@
 	<body>
 		<div class="wrap">
 			<div class="tab">
-				<div class="item cur">项目一</div>
+				<!--<div class="item cur">项目一</div>
 				<div class="item">项目二</div>
-				<div class="item">项目三</div>
+				<div class="item">项目三</div>-->
 			</div>
 			<div class="list">
-				<div class="skillCon">
+				<!--<div class="skillCon">
 					<h5>善行100真真是极好的</h5>
 					<p>好好学习，努力成长早日走上人生巅峰。</p>
 					<img src=""/>
 					<p>力成长早日走上人生巅峰力成长早日走上人生巅峰。 好好学习，努力成长早日走上人生巅峰。。好好学 习，努力成长早日走上人生巅峰。</p>
 					<div class="joinBtn">参加考试</div>
-				</div>
+				</div>-->
 			</div>
 		</div>
 
@@ -60,7 +60,7 @@
 								var htmlCon = '';
 								for(var i = 0;i<res.data.list.length;i++){
 									htmlTil += '<div class="item '+(i==0?'cur':'')+'">'+ res.data.list[i].lession_name +'</div>'
-									htmlCon += '<div class="skillCon '+(i==0?'cur':'')+'"><h5>'+ res.data.list[i].title +'</h5>'+ res.data.list[i].content +'</div>'
+									htmlCon += '<div class="skillCon '+(i==0?'cur':'')+'"><h5>'+ res.data.list[i].title +'</h5>'+ res.data.list[i].content +'<div class="joinBtn">参加考试</div></div>'
 								}
 								$('.tab').html(htmlTil);
 								$('.list').html(htmlCon);
@@ -72,7 +72,7 @@
 			}
 			function events() {
 
-				$('.joinBtn').click(function() {
+				$('.wrap').on('click','.joinBtn',function(){
 					location.href = 'answer.html';
 				})
 				$('.tab').on('click','.item',function(){

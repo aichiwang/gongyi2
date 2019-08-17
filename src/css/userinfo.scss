@@ -33,8 +33,12 @@
     .school{
         select{
             position: absolute;
-            width: 3rem;
+//          width: 3rem;
             right: 1rem;
+            direction: rtl;
+            option{
+                direction: ltr;
+            }
         }
     }
     .subBtn{

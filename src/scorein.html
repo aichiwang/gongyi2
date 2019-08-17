@@ -20,9 +20,9 @@
 	<body>
 		<div class="wrap">
 			<div class="actName">
-				<span>请选择活动名称</span>
+				<span>活动名称</span>
 				<select id="actName">
-					<option value="">活动名称</option>
+					<option value="">请选择活动</option>
 				</select>
 			</div>
 			<input type="text" name="" id="money" value="" placeholder="筹款金额"/>
@@ -61,7 +61,7 @@
 					success: function(res){
 						console.log(res)
 						if(res.code == 0){
-							var html = '';
+							var html = '<option value="">请选择活动</option>';
 							for(var i =0;i<res.data.activities.length;i++){
 								html += '<option value="'+ res.data.activities[i].name +'">'+ res.data.activities[i].name +'</option>'
 							}
