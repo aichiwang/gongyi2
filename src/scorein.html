@@ -19,10 +19,20 @@
 
 	<body>
 		<div class="wrap">
-			<input type="text" name="" id="" value="" placeholder="编号"/>
-			<input type="text" name="" id="" value="" placeholder="活动名称"/>
+			<div class="actName">
+				<span>请选择活动名称</span>
+				<select id="actName">
+					<option value="">活动名称</option>
+				</select>
+			</div>
 			<input type="text" name="" id="money" value="" placeholder="筹款金额"/>
-			<input type="text" name="" id="order_type" value="" placeholder="订单类型"/>
+			<div class="orderType">
+				<span>请选择订单类型</span>
+				<select id="order_type">
+					<option value="支付宝捐赠">支付宝捐赠</option>
+					<option value="邮局捐赠">邮局捐赠</option>
+				</select>
+			</div>
 			<input type="text" name="" id="orderno" value="" placeholder="订单编号"/>
 			<div class="subBtn">提交</div>
 		</div>
@@ -35,16 +45,61 @@
 			Init();
 
 			function Init() {
-				if(getQueryString('scoreid')){
-					getScoreInfo();
-				}
+//				if(getQueryString('scoreid')){
+//					
+//				}
+				getactivitys();
 				events();
 			}
 			
-			function getScoreInfo(){
-				
+			function getactivitys(){
+				$.ajax({
+					type:"post",
+					url:"http://shanxing100.fupin.org.cn/api/activity/getactivitys",
+					async:true,
+					dataType:'jsonp',
+					success: function(res){
+						console.log(res)
+						if(res.code == 0){
+							var html = '';
+							for(var i =0;i<res.data.activities.length;i++){
+								html += '<option value="'+ res.data.activities[i].name +'">'+ res.data.activities[i].name +'</option>'
+							}
+							$('#actName').html(html)
+						}else{
+							globalMes(res.msg)
+						}
+					}
+				});
 			}
+			
+			function orderNum(val) {
+                    var orderType = document.getElementById("order_type").value;
+                    switch (orderType) {
+                    case "支付宝捐赠":
+                        var ok = false;
+                        $.ajax({
+                                type: "GET",
+                                async:false,
+                                url: "http://www.gongyiweilai.org.cn/index/sx100/getOrderInfo.html",
+                                data: "id=" + val,
+                                dataType: "text",
+                                success: function(data){
+                                        data = Number(data);
+                                        var money = Number($('#money').val());
+                                        ok = (data != -1);
+                                        //ok = (data != -1) && (val.length == 18);
+                                        //ok =  (money == data) && (val.length == 18);
+                                       }
+                                });
 
+                        return ok;
+                    case "邮局捐赠":
+                        return val.length == 20;
+                }
+                return false;
+            }
+			window.orderNum=orderNum;
 			function events() {
 
 				$('.subBtn').click(function() {
@@ -59,6 +114,8 @@
 						globalMes('请输入订单类型')
 					}else if(!orderno){
 						globalMes('请输入订单编号')
+					}else if(!orderNum(orderno)){
+							globalMes('订单编号有误，请重新填写')
 					}else{
 						$.ajax({
 							type:"post",
@@ -73,9 +130,12 @@
 							success: function(res){
 								console.log(res)
 								if(res.code == 0){
-									
+									globalMes('录入成功',function(){
+										location.reload();
+									})
+								}else{
+									globalMes(res.msg)
 								}
-								globalMes(res.msg)
 							}
 						});
 					}
