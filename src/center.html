@@ -126,6 +126,9 @@
 						$('.userInfo p').html(res.data.username||'善行萌新')
 						$('.userData .left p').html(res.data.duration)
 						$('.userData .right p').html(res.data.money)
+						if(res.data.isZoneLeader == 1){
+							$('.admin').css('display','inline-block');
+						}
 //						res.data.has_signined = 1
 						if( res.data.has_signined ==1 ){
 							$('#signInOut').unbind('click').on('click',function(){
