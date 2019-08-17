@@ -58,7 +58,7 @@
 					}else if(!passWord){
 						globalMes('请输入密码')
 					}else if(!passWord2){
-						globalMes('请在此输入密码')
+						globalMes('请再此输入密码')
 					}else{
 						$.ajax({
 							type:"post",
@@ -78,6 +78,8 @@
 									globalMes('注册成功！',function(){
 										location.href = 'login.html'
 									})
+								}else{
+									globalMes(res.msg)
 								}
 							}
 						});

@@ -24,6 +24,7 @@
 					<img src="res/img/static/default2.jpg"/>
 				</div>
 				<p></p>
+				<div class="logout">退出登录</div>
 			</div>
 			<div class="userData">
 				<div class="left">
@@ -195,6 +196,24 @@
 				
 				$('.cover').click(function(){
 					$(this).parent().hide();
+				})
+				
+				$('.logout').click(function(){
+					$.ajax({
+						type:"post",
+						url:"http://shanxing100.fupin.org.cn/api/user/logout",
+						async:true,
+						dataType: 'jsonp',
+						success: function(res){
+							if(res.code == 0){
+								globalMes( res.msg ,function(){
+									location.href = "index.html"
+								})
+							}else{
+								globalMes( res.msg )
+							}
+						}
+					});
 				})
 			}
 			
