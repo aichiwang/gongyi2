@@ -20,7 +20,7 @@
 	<body>
 		<div class="wrap">
 			<div class="area">
-				<span>请选择地址</span>
+				<span>请选择省份</span>
 				<select id="province_selector" class="bd-filter__select"></select>
 				<select id="city_selector" class="bd-filter__select" style="display: none;"></select>
 				<select id="district_selector" class="bd-filter__select" style="display: none;"></select>
@@ -153,8 +153,6 @@
 					
 					if(province == '省'){
 						globalMes('请选择省')
-					}else if(city == '市'){
-						globalMes('请选择市')
 					}else if(!school){
 						globalMes('请输入高校名称')
 					}else if(!department){
@@ -190,9 +188,9 @@
 								console.log(res)
 								globalMes(res.msg)
 								if(res.code == 0){
-//									globalMes('登陆成功!',function(){
-//										location.href = 'center.html'
-//									})
+									globalMes('修改成功',function(){
+										location.href = 'center.html'
+									})
 								}
 							}
 						});
