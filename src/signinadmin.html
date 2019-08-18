@@ -36,14 +36,6 @@
 					<div class="operat">
 						<span>删除</span>
 					</div>
-				</div>
-				<div class="item">
-					<h5>猪配齐</h5>
-					<p>时间:&nbsp&nbsp<i>2019-07-22  10:00:55</i></p>
-					<p>地点:&nbsp&nbsp北京市海淀区中关村北一街</p>
-					<div class="operat">
-						<span>删除</span>
-					</div>
 				</div>-->
 			</div>
 			<!--<div class="loadMore">
@@ -52,6 +44,24 @@
 			</div>-->
 		</div>
 		
+		<!--批量管理-->
+		<div class="wrap2">
+			<div class="top">
+				<span class="selectAllBtn cur">全选</span>
+				<div class="right">
+					<!--<span class="confirmBtn">确认</span>
+					<span class="fixedBtn">修改</span>-->
+					<span>删除</span>
+				</div>
+			</div>
+			<div class="list2">
+				<!--<div class="item">
+					<h5><i class="cur"></i>猪配齐</h5>
+					<p>时间:&nbsp&nbsp<i>2019-07-22  10:00:55</i></p>
+					<p>地点:&nbsp&nbsp北京市海淀区中关村北一街</p>
+				</div>-->
+			</div>
+		</div>
 		<!-- Dom Content End -->
 	</body>
 	<script src="res/libs/jquery/jquery.min.js"></script>
@@ -72,7 +82,7 @@
 					url:"http://shanxing100.fupin.org.cn/api/activity/detail",
 					async:true,
 					data:{
-						activityid:1
+						activityid: getQueryString('activityid')
 					},
 					dataType: 'jsonp',
 					success: function(res){
@@ -88,8 +98,11 @@
 			function getmyactivity(){
 				$.ajax({
 					type:"post",
-					url:"http://shanxing100.fupin.org.cn/api/useractivity/getmyactivity",
+					url:"http://shanxing100.fupin.org.cn/api/useractivity/getmyactivitysigninlist",
 					async:true,
+					data:{
+						activityid: getQueryString('activityid')
+					},
 					dataType: 'jsonp',
 					success: function(res){
 //						console.log(res)
@@ -98,17 +111,31 @@
 								$('.list').html('<div class="emptyWrap"><img src="res/img/static/empty.png"></div>');
 							}else{
 								var html = '';
+								var html2 = '';
 								for(var i =0;i<res.data.list.length;i++){
+									if(res.data.list[i].status !=0){
+										continue
+									}
+									var ctime = new Date(res.data.list[i].ctime*1000);
 									html += '<div class="item">'+
-										'<h5>'+ res.data.list[i].name +'</h5>'+
-										'<p>时间:&nbsp&nbsp<i>'+ res.data.list[i].ctime +'</i></p>'+
-										'<p>地点:&nbsp&nbsp'+ res.data.list[i].address +'</p>'+
+//										'<h5>'+ res.data.list[i].name +'</h5>'+
+										'<p>用户名:&nbsp&nbsp'+ res.data.list[i].username +'</p>'+
+										'<p>手机号:&nbsp&nbsp'+ res.data.list[i].phone +'</p>'+
+										'<p>时间:&nbsp&nbsp<i>'+ ctime.toLocaleString() +'</i></p>'+
 										'<div class="operat">'+
-											'<span data-id="'+ res.data.list[i].id +'">删除</span>'+
+											'<span class="delBtn" data-id="'+ res.data.list[i].id +'">删除</span>'+
+											'<span class="conBtn" data-id="'+ res.data.list[i].id +'">确认</span>'+
 										'</div>'+
 									'</div>';
+									html2 += '<div class="item">'+
+											'<h5><i class="cur"></i>'+ res.data.list[i].username +'</h5>'+
+											'<p>手机号:&nbsp&nbsp'+ res.data.list[i].phone +'</p>'+
+											'<p>时间:&nbsp&nbsp<i>'+ ctime.toLocaleString() +'</i></p>'+
+//											'<p>用户名:&nbsp&nbsp'+ res.data.list[i].username +'</p>'+
+										'</div>'		
 								}
 								$('.list').html(html);
+								$('.list2').html(html2);
 							}
 						}
 					}
@@ -117,7 +144,29 @@
 			
 			function events() {
 
-				$('.list').on('click','.operat span',function(){
+				$('.list').on('click','.operat .delBtn',function(){
+					$.ajax({
+						type:"post",
+						url:"http://shanxing100.fupin.org.cn/api/signin/del",
+						async:true,
+						data:{
+							id: $(this).data('id')
+						},
+						dataType: 'jsonp',
+						success: function(res){
+	//						console.log(res)
+							if(res.code ==0){
+								globalMes(res.msg,function(){
+									getmyactivity();
+								})
+							}else{
+								globalMes(res.msg)
+							}
+						}
+					});	
+				})
+				
+				$('.list').on('click','.operat .conBtn',function(){
 					$.ajax({
 						type:"post",
 						url:"http://shanxing100.fupin.org.cn/api/signin/del",
@@ -176,6 +225,30 @@
 						});	
 					}
 				})
+				
+				$('.list2').on('click','.item h5 i',function(){
+					if($(this).hasClass('cur')){
+						$(this).removeClass('cur')
+					}else{
+						$(this).addClass('cur')
+					}
+				})
+				$('.wrap2 .selectAllBtn').click(function(){
+					if($(this).hasClass('cur')){
+						$(this).removeClass('cur')
+						$('.wrap2 .item h5 i').removeClass('cur')
+					}else{
+						$(this).addClass('cur')
+						$('.wrap2 .item h5 i').addClass('cur')
+					}
+				})
+				
+				$('.wrap2 .top .right span').click(function(){
+					
+				})
+				$('.master').click(function(){
+					$('.wrap').hide().siblings('.wrap2').show();
+				})
 			}
 			
 			function globalMes(txt,callback) {
@@ -186,6 +259,12 @@
 						callback();
 					}
 				}, 2000)
+			}
+			
+			function getQueryString(name){
+			     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+			     var r = window.location.search.substr(1).match(reg);
+			     if(r!=null)return  unescape(r[2]); return null;
 			}
 		})
 	</script>

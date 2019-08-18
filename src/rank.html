@@ -81,7 +81,7 @@
 								for(var i =0;i<res.data.list.length;i++){
 									html += '<div class="item">'+
 												'<span class="rank">'+ (i+1) +'</span>'+
-												'<span class="school">'+ res.data.list[i].school +'</span>'+
+												'<span class="school">'+ res.data.list[i].school.slice(0,4) +'</span>'+
 												'<span class="nick">'+ res.data.list[i].username +'</span>'+
 												'<span class="time">'+ res.data.list[i].duration +'</span>'+
 												'<span class="money">'+ res.data.list[i].score +'</span>'+

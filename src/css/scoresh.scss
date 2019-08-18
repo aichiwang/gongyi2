@@ -91,3 +91,75 @@
         }
     }
 }
+
+.wrap2 {
+    .top{
+        height: 1.54rem;
+        border-bottom: 1px solid #E5E5E5;
+        padding-top: 0.64rem;
+        .selectAllBtn{
+            display: inline-block;
+            line-height: 1rem;
+            margin-left: 1.04rem;
+            width: 1.68rem;
+            height: 1.1rem;
+            padding-left: 1.12rem;
+            background: url(../img/static/selectAll2.png);
+            background-size: contain;
+        }
+        .selectAllBtn.cur{
+            background: url(../img/static/selectAll.png);
+            background-size: contain;
+            color: #fff;
+        }
+        .right{
+            float: right;
+            span{
+                display: inline-block;
+                width: 3.16rem;
+                line-height: 1rem;
+                border-right: 1px solid #ccc;
+                text-align: center;
+                color: #999;
+            }
+            span:last-child{
+                border: none;
+            }
+        }
+    }
+    .list2{
+        width: 13.2rem;
+        margin: 0.6rem auto 0;
+        .item{
+            position: relative;
+            height: 2.8rem;
+            box-shadow: 0 0 0.5rem #ddd;
+            border-radius: 0.54rem;
+            margin-bottom: 0.6rem;
+            h5{
+                padding: 0.6rem 0.6rem 0;
+                font-size: 0.6rem;
+                i{
+                    display: inline-block;
+                    width: 0.7rem;
+                    height: 0.7rem;
+                    background: #F4F4F4;
+                    border-radius: 50%;
+                    vertical-align: middle;
+                    margin-right: 0.16rem;
+                }
+                i.cur{
+                    background: url(../img/static/selected.png);
+                    background-size: contain;
+                }
+            }
+            p{
+                padding: 0.28rem 0.6rem 0;
+                color: #999999;
+                i{
+                    color: #000;
+                }
+            }
+        }
+    }
+}

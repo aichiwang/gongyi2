@@ -270,7 +270,8 @@ input[type=date]{
 }
 
 #province_selector{
-    right: 0rem;
+    right: 1rem;
+    direction: rtl;
 }
 #city_selector{
     right: 0.5rem;
