@@ -93,7 +93,7 @@
 			<div class="content short">
 				<h5>活动签退</h5>
 				<input type="text" placeholder="活动编码" id="signOutVal"/>
-				<input type="text" placeholder="活动名称" id="actNameSigout"/>
+				<input type="text" placeholder="活动名称" id="actNameSigout" readonly/>
 				<div class="signIn" id="signOutBtn">打卡签退</div>
 			</div>
 		</div>
@@ -178,6 +178,7 @@
 						dataType: 'jsonp',
 						success: function(res){
 							if (res.code == 0) {
+								location.reload();
 								$('.alert').hide();
 							}
 							globalMes( res.msg ,function(){

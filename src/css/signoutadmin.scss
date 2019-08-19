@@ -52,6 +52,7 @@
         margin-top: 0.6rem;
         .item{
             position: relative;
+            padding-top: 1rem;
             height: 4.84rem;
             box-shadow: 0 0 0.5rem #ddd;
             border-radius: 0.54rem;
@@ -80,7 +81,7 @@
                 border-bottom-right-radius : 0.52rem;
                 span{
                     display: inline-block;
-                    width: 30%;
+                    width: 45%;
                     line-height: 1.3rem;
                     font-size: 0.52rem;
                     color: #999;
@@ -113,6 +114,7 @@
 }
 
 .wrap2 {
+    display: none;
     .top{
         height: 1.54rem;
         border-bottom: 1px solid #E5E5E5;
@@ -147,12 +149,12 @@
             }
         }
     }
-    .list{
+    .list2{
         width: 13.2rem;
         margin: 0.6rem auto 0;
         .item{
             position: relative;
-            height: 3.6rem;
+            height: 4rem;
             box-shadow: 0 0 0.5rem #ddd;
             border-radius: 0.54rem;
             margin-bottom: 0.6rem;

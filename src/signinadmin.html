@@ -127,12 +127,18 @@
 											'<span class="conBtn" data-id="'+ res.data.list[i].id +'">确认</span>'+
 										'</div>'+
 									'</div>';
-									html2 += '<div class="item">'+
+									html2 += '<div class="item" data-id="'+ res.data.list[i].id +'">'+
 											'<h5><i class="cur"></i>'+ res.data.list[i].username +'</h5>'+
 											'<p>手机号:&nbsp&nbsp'+ res.data.list[i].phone +'</p>'+
 											'<p>时间:&nbsp&nbsp<i>'+ ctime.toLocaleString() +'</i></p>'+
 //											'<p>用户名:&nbsp&nbsp'+ res.data.list[i].username +'</p>'+
 										'</div>'		
+								}
+								if(!html){
+									html = '<div class="emptyWrap"><img src="res/img/static/empty.png"></div>'
+								}
+								if(!html2){
+									html2 = '<div class="emptyWrap"><img src="res/img/static/empty.png"></div>'
 								}
 								$('.list').html(html);
 								$('.list2').html(html2);
@@ -169,7 +175,7 @@
 				$('.list').on('click','.operat .conBtn',function(){
 					$.ajax({
 						type:"post",
-						url:"http://shanxing100.fupin.org.cn/api/signin/del",
+						url:"http://shanxing100.fupin.org.cn/api/signin/reveiwpass",
 						async:true,
 						data:{
 							id: $(this).data('id')
@@ -195,9 +201,11 @@
 					}else{
 						$.ajax({
 							type:"get",
-							url:"http://shanxing100.fupin.org.cn/api/useractivity/getmyactivity",
+							url:"http://shanxing100.fupin.org.cn/api/useractivity/getmyactivitysigninlist",
 							async:true,
 							data:{
+								page:1,
+								perpage:1000,
 								name: val
 							},
 							dataType: 'jsonp',
@@ -210,13 +218,17 @@
 										var html = '';
 										for(var i =0;i<res.data.list.length;i++){
 											html += '<div class="item">'+
-												'<h5>'+ res.data.list[i].name +'</h5>'+
+												'<p>用户名:&nbsp&nbsp'+ res.data.list[i].username +'</p>'+
+												'<p>手机号:&nbsp&nbsp'+ res.data.list[i].phone +'</p>'+
 												'<p>时间:&nbsp&nbsp<i>'+ res.data.list[i].ctime +'</i></p>'+
-												'<p>地点:&nbsp&nbsp'+ res.data.list[i].address +'</p>'+
 												'<div class="operat">'+
-													'<span data-id="'+ res.data.list[i].id +'">删除</span>'+
+													'<span class="delBtn" data-id="'+ res.data.list[i].id +'">删除</span>'+
+													'<span class="conBtn" data-id="'+ res.data.list[i].id +'">确认</span>'+
 												'</div>'+
 											'</div>';
+										}
+										if(!html){
+											html = '<div class="emptyWrap"><img src="res/img/static/empty.png"></div>'
 										}
 										$('.list').html(html);
 									}
@@ -244,7 +256,31 @@
 				})
 				
 				$('.wrap2 .top .right span').click(function(){
-					
+					var selectedEle = $('.wrap2 i.cur').parents('.item')
+					var arr = [];
+					selectedEle.each(function(a,b){
+						arr.push($(b).data('id'))
+					})
+					$.ajax({
+						type:"post",
+						url:"http://shanxing100.fupin.org.cn/api/signin/batchdel",
+						async:true,
+						data:{
+							ids: arr.join(',')
+						},
+						dataType: 'jsonp',
+						success: function(res){
+	//						console.log(res)
+							if(res.code ==0){
+								globalMes(res.msg,function(){
+									getmyactivity();
+									$('.selectAllBtn').trigger('click')
+								})
+							}else{
+								globalMes(res.msg)
+							}
+						}
+					});	
 				})
 				$('.master').click(function(){
 					$('.wrap').hide().siblings('.wrap2').show();
