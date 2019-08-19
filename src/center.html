@@ -84,7 +84,7 @@
 			<div class="content short">
 				<h5>活动签到</h5>
 				<input type="text" placeholder="请输入签到活动码" id="signInVal"/>
-				<input type="text" placeholder="获取签到活动名称" id="actNameSigin"/>
+				<input type="text" placeholder="获取签到活动名称" id="actNameSigin" readonly/>
 				<div class="signIn" id="signInBtn">打卡签到</div>
 			</div>
 		</div>
@@ -144,9 +144,10 @@
 								})
 							}
 						}else if(res.code == 6){
+							location.href = 'index.html'
 							$('.userInfo p').html('未登录')
 							$('.logout').html('登录').unbind('click').click(function(){
-								location.href = 'login.html'
+								location.href = 'index.html'
 							})
 						}
 						
@@ -171,13 +172,15 @@
 						type:"post",
 						url:"http://shanxing100.fupin.org.cn/api/useractivity/signin",
 						data: {
-							activityid: val
+							signin_code: val
 						},
 						async:true,
 						dataType: 'jsonp',
 						success: function(res){
-							globalMes( res.msg ,function(){
+							if (res.code == 0) {
 								$('.alert').hide();
+							}
+							globalMes( res.msg ,function(){
 							})
 							
 						}
@@ -242,6 +245,7 @@
 								if(res.data.activity){
 									$('#actNameSigin').val(res.data.activity.name)
 								}else{
+									$('#actNameSigin').val('暂无该活动')
 //									globalMes( '活动码填写有误' )
 								}
 							}else{
