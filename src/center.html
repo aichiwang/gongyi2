@@ -92,7 +92,7 @@
 			<div class="cover"></div>
 			<div class="content short">
 				<h5>活动签退</h5>
-				<input type="text" placeholder="活动编码" id="signOutVal"/>
+				<input type="text" placeholder="活动编码" id="signOutVal" readonly/>
 				<input type="text" placeholder="活动名称" id="actNameSigout" readonly/>
 				<div class="signIn" id="signOutBtn">打卡签退</div>
 			</div>
@@ -108,6 +108,7 @@
 			function Init() {
 				initInfo();
 				events();
+//				getSignOutInfo()
 			}
 			
 			function initInfo(){
@@ -136,6 +137,7 @@
 								$('#signInOut').unbind('click').on('click',function(){
 									$('.alert').eq(1).show();
 									$('.alert').eq(0).hide();
+									getSignOutInfo();
 								})
 							}else{
 								$('#signInOut').unbind('click').on('click',function(){
@@ -149,6 +151,25 @@
 							$('.logout').html('登录').unbind('click').click(function(){
 								location.href = 'index.html'
 							})
+						}
+						
+					}
+				});
+			}
+			
+			function getSignOutInfo(){
+				$.ajax({
+					type:"post",
+					url:"http://shanxing100.fupin.org.cn/api/signout/getsignincode",
+					async:true,
+					dataType: 'jsonp',
+					success: function(res){
+						console.log(res)
+						if(res.code == 0){
+							$('#signOutVal').val(res.data.activity.signin_code)
+							$('#actNameSigout').val(res.data.activity.name)
+						}else{
+							globalMes(res.msg)
 						}
 						
 					}
@@ -203,8 +224,11 @@
 						async:true,
 						dataType: 'jsonp',
 						success: function(res){
-							globalMes( res.msg ,function(){
+							if (res.code == 0) {
+								location.reload();
 								$('.alert').hide();
+							}
+							globalMes( res.msg ,function(){
 							})
 						}
 					});
@@ -256,28 +280,28 @@
 					});
 				})
 				
-				$('#signOutVal').blur(function(){
-					$.ajax({
-						type:"post",
-						url:"http://shanxing100.fupin.org.cn/api/activity/getactivitybycode",
-						async:true,
-						data:{
-							signin_code: $(this).val()
-						},
-						dataType: 'jsonp',
-						success: function(res){
-							if(res.code == 0){
-								if(res.data.activity){
-									$('#actNameSigout').val(res.data.activity.name)
-								}else{
-//									globalMes( '活动码填写有误' )
-								}
-							}else{
-//								globalMes( res.msg )
-							}
-						}
-					});
-				})
+//				$('#signOutVal').blur(function(){
+//					$.ajax({
+//						type:"post",
+//						url:"http://shanxing100.fupin.org.cn/api/activity/getactivitybycode",
+//						async:true,
+//						data:{
+//							signin_code: $(this).val()
+//						},
+//						dataType: 'jsonp',
+//						success: function(res){
+//							if(res.code == 0){
+//								if(res.data.activity){
+//									$('#actNameSigout').val(res.data.activity.name)
+//								}else{
+////									globalMes( '活动码填写有误' )
+//								}
+//							}else{
+////								globalMes( res.msg )
+//							}
+//						}
+//					});
+//				})
 				
 			}
 			

@@ -55,15 +55,15 @@
 			function getactivitys(){
 				$.ajax({
 					type:"post",
-					url:"http://shanxing100.fupin.org.cn/api/activity/getactivitys",
+					url:"http://shanxing100.fupin.org.cn/api/useractivity/getmysigninactivity",
 					async:true,
 					dataType:'jsonp',
 					success: function(res){
 						console.log(res)
 						if(res.code == 0){
 							var html = '<option value="">请选择活动</option>';
-							for(var i =0;i<res.data.activities.length;i++){
-								html += '<option value="'+ res.data.activities[i].name +'">'+ res.data.activities[i].name +'</option>'
+							for(var i =0;i<res.data.activitys.length;i++){
+								html += '<option value="'+ res.data.activitys[i].name +'">'+ res.data.activitys[i].name +'</option>'
 							}
 							$('#actName').html(html)
 						}else{
