@@ -90,6 +90,10 @@
 							}else{
 								var html = "";
 								for(var i =0;i<res.data.list.length;i++){
+									var statusDesc = '待审核';
+									if (res.data.list[i].status == 1) {
+										statusDesc = '已通过';
+									}
 									html +='<div class="item">'+
 										'<h5>'+ res.data.list[i].project_name +'</h5>'+
 										'<p>'+
@@ -97,7 +101,7 @@
 											'&nbsp&nbsp&nbsp&nbsp'+
 											'筹款金额:&nbsp&nbsp<i>'+ res.data.list[i].money +'元</i>'+
 										'</p>'+
-										'<div class="viewCard">查看证书</div>'+
+										'<div class="viewCard">'+ statusDesc +'</div>'+
 									'</div>'
 								}
 								$('.list').html(html);

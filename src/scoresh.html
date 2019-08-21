@@ -20,8 +20,8 @@
 	<body>
 		<div class="wrap">
 			<div class="top">
-				<h5>善行100我的最爱</h5>
-				<p>活动编号：<i>43359333</i></p>
+				<h5></h5>
+				<p>活动编号：<i></i></p>
 				<div class="master">批量管理</div>
 			</div>
 			<div class="search">
@@ -66,8 +66,28 @@
 			Init();
 
 			function Init() {
+				getDetail();
 				getactivityscorelist();
 				events();
+			}
+			
+			function getDetail(){
+				$.ajax({
+					type:"get",
+					url:"http://shanxing100.fupin.org.cn/api/activity/detail",
+					async:true,
+					data:{
+						activityid: getQueryString('activityid')
+					},
+					dataType: 'jsonp',
+					success: function(res){
+//						console.log(res)
+						if(res.code ==0){
+							$('.top h5').html( res.data.name )
+							$('.top i').html( res.data.id )
+						}
+					}
+				});	
 			}
 			
 			function getactivityscorelist(){
@@ -91,17 +111,17 @@
 									if(res.data.list[i].status == 0){
 										html += '<div class="item" data-id="'+ res.data.list[i].id +'">'+
 													'<h5>'+ res.data.list[i].name +'</h5>'+
-													'<p>募捐金额:&nbsp&nbsp<i>'+ res.data.list[i].order_money +'元</i>&nbsp&nbsp&nbsp&nbsp订单编号:&nbsp&nbsp'+ res.data.list[i].orderno +'</p>'+	
+													'<p>募捐金额:&nbsp&nbsp<i>'+ res.data.list[i].money +'元</i><br/>订单编号:&nbsp&nbsp'+ res.data.list[i].orderno +'</p>'+	
 													'<div class="operat">'+
-														'<span class="confirm">确认</span>'+
-														'<span class="fixed"><a href=scorein.html?scoreid='+res.data.list[i].id+'>修改</a></span>'+
 														'<span class="delete">删除</span>'+
+														'<span class="confirm">确认</span>'+
+														'<a href=scorein.html?scoreid='+res.data.list[i].id+'><span class="fixed">修改</span></a>'+
 													'</div>'+
 												'</div>';
 									}
 									html2 += '<div class="item" data-id="'+ res.data.list[i].id +'">'+
 										'<h5><i class="cur"></i>'+ res.data.list[i].name +'</h5>'+
-										'<p>募捐金额:&nbsp&nbsp<i>'+ res.data.list[i].order_money +'元</i>&nbsp&nbsp&nbsp&nbsp订单编号:&nbsp&nbsp'+ res.data.list[i].orderno +'</p>'+
+										'<p>募捐金额:&nbsp&nbsp<i>'+ res.data.list[i].money +'元</i><br/>订单编号:&nbsp&nbsp'+ res.data.list[i].orderno +'</p>'+
 									'</div>'
 								}
 								if(!html){

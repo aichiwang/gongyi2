@@ -45,11 +45,57 @@
 			Init();
 
 			function Init() {
-//				if(getQueryString('scoreid')){
-//					
-//				}
-				getactivitys();
+				if(getQueryString('scoreid')){
+					getscoredetail();
+				}else if(getQueryString('activityid')){
+					getActivityDetail();
+				}else{
+					getactivitys();
+				}
 				events();
+			}
+			
+			function getscoredetail(){
+				$.ajax({
+					type:"post",
+					url:"http://shanxing100.fupin.org.cn/api/score/getscoredetail",
+					async:true,
+					data:{
+						id: getQueryString('scoreid')
+					},
+					dataType:'jsonp',
+					success: function(res){
+						console.log(res)
+						if(res.code == 0){
+							$('#actName').html('<option value="">'+ res.data.activity_info.name +'</option>').attr('readonly','readonly')
+							$('#money').val( res.data.score_info.money )
+							$('#order_type [value="'+ res.data.activity_info.order_type +'"]').select()
+							$('#orderno').val( res.data.score_info.orderno )
+						}else{
+							globalMes(res.msg)
+						}
+					}
+				});
+			}
+			
+			function getActivityDetail(){
+				$.ajax({
+					type:"post",
+					url:"http://shanxing100.fupin.org.cn/api/activity/detail",
+					async:true,
+					data:{
+						activityid: getQueryString('activityid')
+					},
+					dataType:'jsonp',
+					success: function(res){
+						console.log(res)
+						if(res.code == 0){
+							$('#actName').html('<option value="">'+ res.data.name +'</option>').attr('readonly','readonly')
+						}else{
+							globalMes(res.msg)
+						}
+					}
+				});
 			}
 			
 			function getactivitys(){
@@ -63,7 +109,7 @@
 						if(res.code == 0){
 							var html = '<option value="">请选择活动</option>';
 							for(var i =0;i<res.data.activitys.length;i++){
-								html += '<option value="'+ res.data.activitys[i].name +'">'+ res.data.activitys[i].name +'</option>'
+								html += '<option value="'+ res.data.activitys[i].id +'">'+ res.data.activitys[i].name +'</option>'
 							}
 							$('#actName').html(html)
 						}else{
@@ -103,26 +149,34 @@
 			function events() {
 
 				$('.subBtn').click(function() {
-					
+					var act = $('#actName').val();
 					var money = $('#money').val();
 					var order_type = $('#order_type').val();
 					var orderno = $('#orderno').val();
 					
-					if(!money){
+					if(!act){
+						globalMes('请选择活动')
+					}else if(!money){
 						globalMes('请输入筹款金额')
 					}else if(!order_type){
 						globalMes('请输入订单类型')
 					}else if(!orderno){
 						globalMes('请输入订单编号')
-					}else if(!orderNum(orderno)){
+					}else if(!orderNum(orderno)&&(!getQueryString('scoreid'))){
 							globalMes('订单编号有误，请重新填写')
 					}else{
+						if(getQueryString('scoreid')){
+							var reqUrl = "http://shanxing100.fupin.org.cn/api/score/update"
+						}else{
+							var reqUrl = "http://shanxing100.fupin.org.cn/api/score/addscore"
+						}
 						$.ajax({
 							type:"post",
-							url:"http://shanxing100.fupin.org.cn/api/score/addscore",
+							url: reqUrl,
 							async:true,
 							dataType:'jsonp',
 							data:{
+								activityid: act,
 								money: money,
 								order_type: order_type,
 								orderno: orderno,

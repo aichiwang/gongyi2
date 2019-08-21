@@ -20,8 +20,8 @@
 	<body>
 		<div class="wrap">
 			<div class="top">
-				<h5>0</h5>
-				<p>活动编号：<i>0</i></p>
+				<h5></h5>
+				<p>活动编号：<i></i></p>
 				<div class="master">批量管理</div>
 			</div>
 			<div class="search">
@@ -116,12 +116,13 @@
 									if(res.data.list[i].status !=0){
 										continue
 									}
-									var ctime = new Date(res.data.list[i].ctime*1000);
+									var ctime = res.data.list[i].ctime;
+//									var ctime = new Date(res.data.list[i].ctime*1000);
 									html += '<div class="item">'+
 //										'<h5>'+ res.data.list[i].name +'</h5>'+
-										'<p>用户名:&nbsp&nbsp'+ res.data.list[i].username +'</p>'+
-										'<p>手机号:&nbsp&nbsp'+ res.data.list[i].phone +'</p>'+
-										'<p>时间:&nbsp&nbsp<i>'+ ctime.toLocaleString() +'</i></p>'+
+										'<p>用户名:&nbsp&nbsp<i>'+ res.data.list[i].username +'</i></p>'+
+										'<p>手机号:&nbsp&nbsp<i>'+ res.data.list[i].phone +'</i></p>'+
+										'<p>签到时间:&nbsp&nbsp<i>'+ ctime +'</i></p>'+
 										'<div class="operat">'+
 											'<span class="delBtn" data-id="'+ res.data.list[i].id +'">删除</span>'+
 											'<span class="conBtn" data-id="'+ res.data.list[i].id +'">确认</span>'+
@@ -130,7 +131,7 @@
 									html2 += '<div class="item" data-id="'+ res.data.list[i].id +'">'+
 											'<h5><i class="cur"></i>'+ res.data.list[i].username +'</h5>'+
 											'<p>手机号:&nbsp&nbsp'+ res.data.list[i].phone +'</p>'+
-											'<p>时间:&nbsp&nbsp<i>'+ ctime.toLocaleString() +'</i></p>'+
+											'<p>时间:&nbsp&nbsp<i>'+ ctime +'</i></p>'+
 //											'<p>用户名:&nbsp&nbsp'+ res.data.list[i].username +'</p>'+
 										'</div>'		
 								}
@@ -175,7 +176,7 @@
 				$('.list').on('click','.operat .conBtn',function(){
 					$.ajax({
 						type:"post",
-						url:"http://shanxing100.fupin.org.cn/api/signin/reveiwpass",
+						url:"http://shanxing100.fupin.org.cn/api/signin/reviewpass",
 						async:true,
 						data:{
 							id: $(this).data('id')

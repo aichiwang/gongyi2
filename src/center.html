@@ -129,7 +129,7 @@
 							$('.uImg img').attr('src',res.data.avatar||'res/img/static/default2.jpg')
 							$('.userInfo p').html(res.data.username||'善行萌新')
 							$('.userData .left p').html(res.data.duration)
-							$('.userData .right p').html(res.data.money)
+							$('.userData .right p').html(res.data.confirmMoney)
 							if(res.data.isZoneLeader == 1){
 								$('.admin').css('display','inline-block');
 							}

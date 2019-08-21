@@ -20,8 +20,8 @@
 	<body>
 		<div class="wrap">
 			<div class="top">
-				<h5>善行100我的最爱</h5>
-				<p>活动编号：<i>43359333</i></p>
+				<h5></h5>
+				<p>活动编号：<i></i></p>
 				<div class="master">批量管理</div>
 			</div>
 			<div class="search">
@@ -99,7 +99,7 @@
 			function getmyactivity(){
 				$.ajax({
 					type:"post",
-					url:"http://shanxing100.fupin.org.cn//api/signout/getmyactivitysignoutlist",
+					url:"http://shanxing100.fupin.org.cn/api/signout/getmyactivitysignoutlist",
 					async:true,
 					data:{
 						activityid: getQueryString('activityid')
@@ -117,11 +117,12 @@
 									if(res.data.list[i].status !=0){
 										continue
 									}
-									var ctime = new Date(res.data.list[i].outtime*1000);
+//									var ctime = new Date(res.data.list[i].outtime*1000);
+									var ctime = res.data.list[i].outtime;
 									html += '<div class="item">'+
-										'<p>用户名:&nbsp&nbsp'+ res.data.list[i].username +'</p>'+
-										'<p>手机号:&nbsp&nbsp'+ res.data.list[i].phone +'</p>'+
-										'<p>时间:&nbsp&nbsp<i>'+ ctime.toLocaleString() +'</i></p>'+
+										'<p>用户名:&nbsp&nbsp<i>'+ res.data.list[i].username +'</i></p>'+
+										'<p>手机号:&nbsp&nbsp<i>'+ res.data.list[i].phone +'</i></p>'+
+										'<p>签退时间:&nbsp&nbsp<i>'+ ctime +'</i></p>'+
 										'<div class="operat">'+
 											'<span class="delBtn" data-id="'+ res.data.list[i].id +'">删除</span>'+
 											'<span class="conBtn" data-id="'+ res.data.list[i].id +'">确认</span>'+
@@ -130,7 +131,7 @@
 									html2 += '<div class="item" data-id="'+ res.data.list[i].id +'">'+
 											'<h5><i class="cur"></i>'+ res.data.list[i].username +'</h5>'+
 											'<p>手机号:&nbsp&nbsp'+ res.data.list[i].phone +'</p>'+
-											'<p>时间:&nbsp&nbsp<i>'+ ctime.toLocaleString() +'</i></p>'+
+											'<p>签退时间:&nbsp&nbsp<i>'+ ctime +'</i></p>'+
 										'</div>'		
 								}
 								if(!html){

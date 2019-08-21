@@ -38,12 +38,13 @@
         background: #F2F2F2;
         input{
             background: transparent;
-            font-size: 0.6rem;
+            font-size: 0.5rem;
             vertical-align: middle;
             line-height: 1.52rem;
             color: #c0c0c0;
         }
         img{
+            width:20px;
             vertical-align: middle;
         }
     }
@@ -51,7 +52,7 @@
         margin-top: 0.6rem;
         .item{
             position: relative;
-            height: 4.84rem;
+            height: 5.84rem;
             box-shadow: 0 0 0.5rem #ddd;
             border-radius: 0.54rem;
             margin-bottom: 0.6rem;
@@ -133,7 +134,7 @@
         margin: 0.6rem auto 0;
         .item{
             position: relative;
-            height: 2.8rem;
+            height: 3.8rem;
             box-shadow: 0 0 0.5rem #ddd;
             border-radius: 0.54rem;
             margin-bottom: 0.6rem;

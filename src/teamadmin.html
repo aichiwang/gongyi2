@@ -20,7 +20,7 @@
 	<body>
 		<div class="wrap">
 			<div class="top">
-				<h5>签到活动列表</h5>
+				<h5>签到活动管理</h5>
 			</div>
 			<div class="list">
 				<!--<div class="item">
@@ -88,12 +88,11 @@
 								for(var i =0;i<res.data.activities.length;i++){
 									html += '<div class="item">'+
 										'<h5>'+
-											'<i>'+ res.data.activities[i].id  +'</i>'+
 											'<span>活动编号: <i>'+ res.data.activities[i].id +'</i></span>'+
 										'</h5>'+
 										'<div class="til">'+ res.data.activities[i].name +'</div>'+
-										'<p>起止时间:'+ res.data.activities[i].ctime +'</p>'+
-										'<p>活动地点:'+ res.data.activities[i].address +'</p>'+
+										'<p>活动时间:'+ res.data.activities[i].stime + '至' + res.data.activities[i].stime +'</p>'+
+										'<p>活动签到码:'+ res.data.activities[i].signin_code +'</p>'+
 										'<div class="dataDetail">'+
 											'<div class="dataItem">'+
 												'<p>'+ (res.data.activities[i].duration||0) +'时</p>'+
