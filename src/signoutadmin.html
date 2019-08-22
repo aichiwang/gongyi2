@@ -102,6 +102,8 @@
 					url:"http://shanxing100.fupin.org.cn/api/signout/getmyactivitysignoutlist",
 					async:true,
 					data:{
+						page:1,
+						perpage: 1000,
 						activityid: getQueryString('activityid')
 					},
 					dataType: 'jsonp',
@@ -218,10 +220,13 @@
 									}else{
 										var html = '';
 										for(var i =0;i<res.data.list.length;i++){
+											if(res.data.list[i].status !=0){
+												continue
+											}
 											html += '<div class="item">'+
 												'<h5>'+ res.data.list[i].name +'</h5>'+
-												'<p>时间:&nbsp&nbsp<i>'+ res.data.list[i].ctime +'</i></p>'+
-												'<p>地点:&nbsp&nbsp'+ res.data.list[i].address +'</p>'+
+												'<p>手机号:&nbsp&nbsp<i>'+ res.data.list[i].phone +'</i></p>'+
+												'<p>签退时间:&nbsp&nbsp'+ res.data.list[i].outtime +'</p>'+
 												'<div class="operat">'+
 													'<span data-id="'+ res.data.list[i].id +'">确认</span>'+
 													'<span data-id="'+ res.data.list[i].id +'">删除</span>'+
