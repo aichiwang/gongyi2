@@ -162,7 +162,7 @@
 						globalMes('请输入订单类型')
 					}else if(!orderno){
 						globalMes('请输入订单编号')
-					}else if(!orderNum(orderno)&&(!getQueryString('scoreid'))){
+					}else if(!orderNum(orderno)){
 							globalMes('订单编号有误，请重新填写')
 					}else{
 						if(getQueryString('scoreid')){
