@@ -69,7 +69,7 @@
 						if(res.code == 0){
 							$('#actName').html('<option value="'+ res.data.activity_info.id +'">'+ res.data.activity_info.name +'</option>').attr('readonly','readonly')
 							$('#money').val( res.data.score_info.money )
-							$('#order_type [value="'+ res.data.activity_info.order_type +'"]').select()
+							$('#order_type [value="'+ res.data.activity_info.order_type +'"]')[0].selected = true;
 							$('#orderno').val( res.data.score_info.orderno )
 						}else{
 							globalMes(res.msg)
