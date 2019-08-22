@@ -67,7 +67,7 @@
 					success: function(res){
 						console.log(res)
 						if(res.code == 0){
-							$('#actName').html('<option value="">'+ res.data.activity_info.name +'</option>').attr('readonly','readonly')
+							$('#actName').html('<option value="'+ res.data.activity_info.id +'">'+ res.data.activity_info.name +'</option>').attr('readonly','readonly')
 							$('#money').val( res.data.score_info.money )
 							$('#order_type [value="'+ res.data.activity_info.order_type +'"]').select()
 							$('#orderno').val( res.data.score_info.orderno )
@@ -90,7 +90,7 @@
 					success: function(res){
 						console.log(res)
 						if(res.code == 0){
-							$('#actName').html('<option value="">'+ res.data.name +'</option>').attr('readonly','readonly')
+							$('#actName').html('<option value="'+ res.data.id +'">'+ res.data.name +'</option>').attr('readonly','readonly')
 						}else{
 							globalMes(res.msg)
 						}
