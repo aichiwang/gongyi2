@@ -22,8 +22,6 @@
 			<div class="area school">
 				<span>请选择省份</span>
 				<select id="province_selector" class="bd-filter__select"></select>
-				<select id="city_selector" class="bd-filter__select" style="display: none;"></select>
-				<select id="district_selector" class="bd-filter__select" style="display: none;"></select>
 			</div>
 			<div class="area school">
 				<span>请选择高校</span>
@@ -56,13 +54,12 @@
 		<!-- Dom Content End -->
 	</body>
 	<script src="res/libs/jquery/jquery.min.js"></script>
-	<script src="res/libs/areas.js"></script>
+	<!--<script src="res/libs/areas.js"></script>-->
 	<script>
 		$(function() {
 			Init();
 
 			function Init() {
-				addressInit('province_selector', 'city_selector', 'district_selector');
 				getSchool();
 				events();
 			}
@@ -108,6 +105,11 @@
 //						console.log(res)
 						if(res.code == 0){
 							window.schoolList = res.data.school_list
+							var str = '';
+							for(var i in res.data.school_list){
+								str += '<option value="'+ i +'">'+ i +'</option>'
+							}
+							$('#province_selector').html(str);
 							initInfo();
 						}else{
 							globalMes(res.msg)
