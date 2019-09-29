@@ -135,12 +135,20 @@
 							}
 							if( res.data.has_signined ==1 ){
 								$('#signInOut').unbind('click').on('click',function(){
+									if(!window.haspassed){
+										toast('请先参加考试')
+										return;
+									}
 									$('.alert').eq(1).show();
 									$('.alert').eq(0).hide();
 									getSignOutInfo();
 								})
 							}else{
 								$('#signInOut').unbind('click').on('click',function(){
+									if(!window.haspassed){
+										toast('请先参加考试')
+										return;
+									}
 									$('.alert').eq(0).show();
 									$('.alert').eq(1).hide();
 								})
@@ -175,6 +183,24 @@
 					}
 				});
 			}
+			
+			function getExamState(){
+				$.ajax({
+					type:"post",
+					url:"http://shanxing100.fupin.org.cn/api/exam/ispassed",
+					async:true,
+					dataType: 'jsonp',
+					success: function(res){
+//						console.log(res)
+						if(res.data.is_passed == 1){	//通过
+							window.haspassed = true;
+						}else{
+							window.haspassed = false;
+						}
+					}
+				});
+			}
+			
 			function events() {
 
 				$('.modify').click(function() {
