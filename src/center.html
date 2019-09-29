@@ -136,7 +136,7 @@
 							if( res.data.has_signined ==1 ){
 								$('#signInOut').unbind('click').on('click',function(){
 									if(!window.haspassed){
-										toast('请先参加考试')
+										globalMes('请先参加考试')
 										return;
 									}
 									$('.alert').eq(1).show();
@@ -146,7 +146,7 @@
 							}else{
 								$('#signInOut').unbind('click').on('click',function(){
 									if(!window.haspassed){
-										toast('请先参加考试')
+										globalMes('请先参加考试')
 										return;
 									}
 									$('.alert').eq(0).show();
